@@ -1,0 +1,105 @@
+/* General Styles for the container */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* Light background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  padding: 20px; /* Add some padding around the edges */
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 450px; /* Increase the width of the form */
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.register-form {
+  width: 100%;
+}
+
+.form-heading {
+  text-align: center;
+  margin-bottom: 30px; /* Increase the space between heading and form elements */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.form-input,
+.form-select,
+.submit-btn {
+  width: 100%;
+  padding: 12px; /* Increase padding for more space */
+  margin: 12px 0; /* Increase space between input fields */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px; /* Increase font size for better readability */
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.sign-in-link {
+  text-align: center;
+  margin-top: 20px; /* Add space between form and sign-in link */
+}
+
+.sign-in-link .link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.sign-in-link .link:hover {
+  text-decoration: underline;
+}
+
+.error-text {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 6px; /* Increase space between input and error message */
+}
+
+.form-input,
+.form-select {
+  margin-bottom: 12px; /* Add more space below form inputs */
+}
+
+.general-error {
+  text-align: center;
+  font-size: 1rem; /* Increase the error message font size */
+  color: #ff4d4f;
+  margin-bottom: 15px; /* Add extra margin for general error */
+}
+
+.password-container {
+  position: relative;
+}
+
+.show-password-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+}

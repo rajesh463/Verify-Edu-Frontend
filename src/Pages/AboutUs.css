@@ -1,0 +1,113 @@
+/* About Us Page Container */
+.about-us-container {
+  padding-top: 80px; /* Add padding to avoid overlap with fixed navbar */
+  padding: 20px;
+  background-color: #f4f4f4; /* Light background color for the page */
+}
+
+/* Page Heading */
+.about-us-heading {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Content Section */
+.about-us-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* Image Section */
+.about-us-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  max-width: 600px; /* Limit the image size */
+}
+
+/* Text Section */
+.about-us-text {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  text-align: justify;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Team Section */
+.about-us-team {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* Team Member Card */
+.team-member {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  width: 250px;
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: scale(1.05); /* Hover effect for team member */
+}
+
+.team-member img {
+  width: 100%;
+  border-radius: 50%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.team-member h3 {
+  font-size: 20px;
+  margin-top: 15px;
+  color: #333;
+}
+
+.team-member p {
+  font-size: 16px;
+  color: #777;
+  margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-us-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .about-us-image img {
+    max-width: 100%;
+  }
+
+  .about-us-text {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+
+  .about-us-team {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .team-member {
+    width: 200px;
+    margin: 0 auto;
+  }
+}

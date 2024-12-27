@@ -1,0 +1,54 @@
+.navbar {
+  display: flex; /* Enable flexbox */
+  justify-content: space-between; /* Space between logo and links */
+  align-items: center; /* Vertically center items */
+  width: 100%;
+  position: fixed; /* Fix the navbar at the top */
+  top: 0; /* Stick it to the top */
+  left: 0;
+  z-index: 1000; /* Ensure it's above other elements */
+  padding: 0 24px; /* Adjust padding */
+  height: 64px; /* Fixed height */
+  background-color: #1d2125; /* The desired background color */
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.navbar-links {
+  display: flex;
+  gap: 32px; /* Increase gap between links */
+  margin: 0; /* Remove additional margins */
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo h1 {
+  font-size: 24px; /* Adjust the font size */
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 32px; /* Increase gap between links */
+  margin-right: 50px; /* Increase the margin to push the links to the left */
+}
+
+.navbar-links li {
+  list-style: none;
+}
+
+.navbar-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.navbar-links li a:hover {
+  color: #ffcc00; /* Hover effect */
+}
