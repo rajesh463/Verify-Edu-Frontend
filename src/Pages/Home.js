@@ -10,6 +10,7 @@ const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Change image every 3 seconds
+  //useeffect used
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
