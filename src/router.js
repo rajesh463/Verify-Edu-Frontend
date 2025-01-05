@@ -6,6 +6,8 @@ import Login from "./features/Auth/Login";
 import AboutUs from "./Pages/AboutUs";
 import StudentDashboard from "./Pages/StudentDashboard";
 import App from "./App";
+import ProtectedRoute from "./components/Navigation/ProtectedRoute";
+import AccessDenied from "./Pages/AccessDenied";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +29,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/student-dashboard",
-        Component: StudentDashboard,
+        Component: () => (
+          <ProtectedRoute roles={["ve_student"]}>
+            <StudentDashboard />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/aboutus",
@@ -36,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         Component: Home,
+      },
+      {
+        path: "/accessdenied",
+        Component: AccessDenied,
       },
     ],
   },
