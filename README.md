@@ -1,5 +1,7 @@
 Institutional Verified Individual Education Records Using Blockchain
+
 Overview
+
 This project leverages blockchain technology to create a secure and tamper-proof system for storing and verifying educational records. It addresses the limitations of traditional record-keeping methods by ensuring authenticity, security, and global accessibility of academic credentials.
 
 Features
@@ -22,23 +24,7 @@ Backend: Node.js, Express.js
 Database: MySQL
 Blockchain: Ethereum (or any other blockchain platform)
 API Integration: RESTful APIs for third-party access
-Installation
-Clone the repository:
-bash
-Copy code
-git clone https://github.com/your-repo-name.git
-Navigate to the project directory:
-bash
-Copy code
-cd project-directory
-Install dependencies:
-bash
-Copy code
-npm install
-Start the development server:
-bash
-Copy code
-npm start
+
 Usage
 Students can register, log in, and upload their educational documents for verification.
 Institutes can log in to verify submitted documents.
@@ -52,28 +38,9 @@ Future Directions
 Support for multi-blockchain integration.
 Enhanced privacy controls using Zero-Knowledge Proofs (ZKPs).
 Scalability improvements for large-scale adoption.
-Contributing
-Contributions are welcome! Please follow these steps:
-
-Fork the repository.
-Create a new branch:
-bash
-Copy code
-git checkout -b feature-name
-Commit your changes:
-bash
-Copy code
-git commit -m "Add feature name"
-Push to your branch:
-bash
-Copy code
-git push origin feature-name
-Open a pull request.
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
 Contact
 For any queries or support, please contact:
 
 Project Lead: Rajesh Pokharkar
-Email: rajesh.pokharkar@example.com
+Email: rajeshpokharkar81@gmail.com
