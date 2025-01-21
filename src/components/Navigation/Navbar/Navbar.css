@@ -1,54 +1,155 @@
 .navbar {
-  display: flex; /* Enable flexbox */
-  justify-content: space-between; /* Space between logo and links */
-  align-items: center; /* Vertically center items */
-  width: 100%;
-  position: fixed; /* Fix the navbar at the top */
-  top: 0; /* Stick it to the top */
+  position: fixed;
+  top: 0;
   left: 0;
-  z-index: 1000; /* Ensure it's above other elements */
-  padding: 0 24px; /* Adjust padding */
-  height: 64px; /* Fixed height */
-  background-color: #1d2125; /* The desired background color */
-  color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.navbar-links {
-  display: flex;
-  gap: 32px; /* Increase gap between links */
-  margin: 0; /* Remove additional margins */
-}
-
-.navbar-logo {
+  right: 0;
+  height: 60px;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
   display: flex;
   align-items: center;
 }
 
-.navbar-logo h1 {
-  font-size: 24px; /* Adjust the font size */
-  font-weight: 600;
-  margin: 0;
-  color: white;
-}
-
-.navbar-links {
+.navbar-container {
+  width: 100%;
+  height: 100%;
   display: flex;
-  gap: 32px; /* Increase gap between links */
-  margin-right: 50px; /* Increase the margin to push the links to the left */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
 }
 
-.navbar-links li {
-  list-style: none;
+/* Left section with logo */
+.navbar-left {
+  display: flex;
+  align-items: center;
 }
 
-.navbar-links li a {
-  color: white;
+.navbar-brand {
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  font-size: 18px;
-  transition: color 0.3s ease;
+  gap: 0.75rem;
 }
 
-.navbar-links li a:hover {
-  color: #ffcc00; /* Hover effect */
+.navbar-logo {
+  height: 35px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-title {
+  color: #333333;
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Center section with navigation links */
+.navbar-center {
+  display: none; /* Hide center navigation as per MAHADBT design */
+}
+
+/* Right section with user info */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f5f5f5;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.welcome-text {
+  color: #666666;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.user-name {
+  color: #333333;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.logout-button {
+  background: transparent;
+  border: 1px solid #8b0000;
+  color: #8b0000;
+  padding: 4px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.logout-button:hover {
+  background: #8b0000;
+  color: #ffffff;
+}
+
+/* Add these styles to your existing Navbar.css */
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-button {
+  background: transparent;
+  border: 1px solid #8b0000;
+  color: #8b0000;
+  padding: 6px 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.login-button:hover {
+  background: #8b0000;
+  color: #ffffff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 1rem;
+  }
+
+  .navbar-title {
+    font-size: 1rem;
+  }
+
+  .welcome-text {
+    display: none;
+  }
+
+  .user-info {
+    gap: 0.5rem;
+    padding: 4px 8px;
+  }
+
+  .logout-button {
+    padding: 3px 8px;
+    font-size: 0.8rem;
+  }
+
+  .login-button {
+    padding: 4px 12px;
+    font-size: 0.85rem;
+  }
 }

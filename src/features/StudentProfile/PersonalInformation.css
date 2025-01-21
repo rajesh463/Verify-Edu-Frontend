@@ -1,0 +1,77 @@
+/* Personal Information Section */
+.personal-info-section {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Religious Data Section */
+.religious-data-section {
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Caste Section */
+.caste-section {
+  background-color: #f7f7f7;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* File Upload Section */
+.file-upload-section {
+  background-color: #f3f3f3;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Form Container and Layout */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #ff4d4d;
+  font-size: 0.875rem;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Input and Select Styling */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Button Styling */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}

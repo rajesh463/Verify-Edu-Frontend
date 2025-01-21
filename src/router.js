@@ -1,4 +1,5 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+import { FormProvider } from "./context/FormContext";
 
 import Home from "./Pages/Home";
 import Register from "./features/Auth/Register";
@@ -8,6 +9,16 @@ import StudentDashboard from "./Pages/StudentDashboard";
 import App from "./App";
 import ProtectedRoute from "./components/Navigation/ProtectedRoute";
 import AccessDenied from "./Pages/AccessDenied";
+import Profile from "./Pages/Profile";
+
+// Create a wrapper component that combines ProtectedRoute and FormProvider
+const ProtectedProfileWithForm = () => (
+  <ProtectedRoute roles={["ve_student"]}>
+    <FormProvider>
+      <Profile />
+    </FormProvider>
+  </ProtectedRoute>
+);
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: "/accessdenied",
         Component: AccessDenied,
+      },
+      {
+        path: "/student-profile",
+        Component: ProtectedProfileWithForm,
       },
     ],
   },

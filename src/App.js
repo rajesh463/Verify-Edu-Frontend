@@ -1,18 +1,21 @@
 // src/App.js
 
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navigation/Navbar/Navbar";
 import Sidebar from "./components/Navigation/Sidebar/Sidebar";
-import { Outlet } from "react-router-dom";
+import "./App.css";
 
-function App() {
+const App = () => {
   return (
-    <>
+    <div className="app">
       <Navbar />
       <Sidebar />
-      <Outlet /> {/* Renders the child components based on route */}
-    </>
+      <main className="main-content">
+        <Outlet />
+      </main>
+    </div>
   );
-}
+};
 
 export default App;

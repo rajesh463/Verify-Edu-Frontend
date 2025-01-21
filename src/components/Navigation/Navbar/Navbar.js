@@ -1,50 +1,42 @@
-import React, { useState, useEffect } from "react";
-import "./Navbar.css";
-import Services from "../../../services/Services";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
 
-  const navigate = useNavigate();
-
   const handleLogout = () => {
     logout();
-    navigate("/login");
-    console.log("logout form system");
   };
 
   return (
     <nav className="navbar">
-      <div className="navbar-brand">
-        <h1 className="navbar-title">Verify Edu</h1>
+      <div className="navbar-container">
+        <div className="navbar-left">
+          <Link to="/" className="navbar-brand">
+            <span className="navbar-title">Verify Edu</span>
+          </Link>
+        </div>
+
+        <div className="navbar-right">
+          {user ? (
+            <div className="user-info">
+              <span className="welcome-text">Welcome!</span>
+              <span className="user-name">{user.name || "User"}</span>
+              <button onClick={handleLogout} className="logout-button">
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div className="auth-buttons">
+              <Link to="/login" className="login-button">
+                Login
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
-      <ul className="navbar-links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/aboutus">About Us</Link>
-        </li>
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
-        {!user?.email ? (
-          <>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/register">Register</Link>
-            </li>
-          </>
-        ) : (
-          <li>
-            <Link onClick={handleLogout}>logout</Link>
-          </li>
-        )}
-      </ul>
     </nav>
   );
 };
