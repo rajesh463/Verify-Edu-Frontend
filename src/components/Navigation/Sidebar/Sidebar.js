@@ -36,11 +36,6 @@ const Sidebar = () => {
       return (
         <div className={isCollapsed ? "sidebar collapsed" : "sidebar"}>
           <div className="user-info-wrapper">
-            <div className="user-info">
-              <p>Welcome!</p>
-              <h1>{user?.name}</h1>
-            </div>
-
             <button className="toggle-button" onClick={toggleSidebar}>
               {isCollapsed ? "»" : "«"}
             </button>
@@ -60,6 +55,17 @@ const Sidebar = () => {
               >
                 <FaSchool className="icon" />
                 {!isCollapsed && <span>Dashboard</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/student-profile"
+                className={`menu-item ${
+                  isActive("/student-prfile") ? "active" : ""
+                }`}
+              >
+                <FaUserGraduate className="icon" />
+                {!isCollapsed && <span>Profile</span>}
               </Link>
             </li>
           </ul>

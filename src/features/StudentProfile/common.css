@@ -1,0 +1,42 @@
+.file-upload-section {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.file-upload-section h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1rem;
+}
+
+.upload-container {
+  margin-bottom: 15px;
+}
+
+.view-container {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.file-status {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.upload-progress {
+  margin-top: 10px;
+  height: 4px;
+  background-color: #eee;
+  border-radius: 2px;
+}
+
+.upload-progress-bar {
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
