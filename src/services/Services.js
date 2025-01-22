@@ -139,4 +139,20 @@ export default {
       `${EDUCATION}/courses?levelStreamId=${levelStreamId}`
     );
   },
+  getPastQualifications: async (userId) => {
+    return apiServiceBased.get(
+      `${STUDENT}/past-qualifications?userId=${encodeURIComponent(userId)}`
+    );
+  },
+  deletePastQualification: async (data) => {
+    try {
+      const response = await apiServiceBased.delete(
+        `${STUDENT}/past-qualification`,
+        data
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

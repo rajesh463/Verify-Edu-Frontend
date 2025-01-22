@@ -1,30 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import Services from "../../services/Services";
 
 import "./ViewFile.css";
 
-const ViewFile = ({ tag }) => {
+const ViewFileWithHandler = ({ tag, handleShow }) => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [fileUrl, setFileUrl] = useState(null);
   const { user } = useAuth();
-
-  const handleShow = async () => {
-    try {
-      setLoading(true);
-      setMessage("");
-      const res = await Services.getPreSignedUrlToAccess(user.email, tag);
-      setFileUrl(res?.data?.url);
-      setFile(res?.data?.file);
-    } catch (error) {
-      setMessage("Error fetching file.");
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    setFile(handleShow(tag));
+  }, [tag]);
 
   const handleCloseFile = () => {
     setFileUrl(null);
@@ -80,4 +68,4 @@ const ViewFile = ({ tag }) => {
   );
 };
 
-export default ViewFile;
+export default ViewFileWithHandler;

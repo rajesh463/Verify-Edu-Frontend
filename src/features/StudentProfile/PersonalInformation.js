@@ -158,7 +158,8 @@ const PersonalInformation = () => {
         return alert("User not found");
       }
       const response = await Service.getPersonalInfo(user?.email);
-      console.log("response", response?.data?.data);
+
+      console.log("response", response);
       if (response.status === 200 && response.data?.data) {
         const data = response.data.data;
         console.log("Hello");
