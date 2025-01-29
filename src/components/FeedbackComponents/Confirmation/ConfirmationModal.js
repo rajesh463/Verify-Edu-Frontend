@@ -1,20 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ConfirmationModal.css"; // Optional: create CSS for modal
-import "../../../CSS/Main.css";
-
 
 const ConfirmationModal = ({ title, message, onConfirm, onCancel }) => {
+  // Disable body scroll when modal is open
+  useEffect(() => {
+    document.body.classList.add("modal-open");
+    return () => {
+      document.body.classList.remove("modal-open");
+    };
+  }, []);
+
+  // Handle ESC key press
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) onCancel();
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [onCancel]);
+
+  // Handle click outside modal
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onCancel();
+    }
+  };
+
   return (
-    <div className="modal-backdrop">
+    <div className="modal-backdrop" onClick={handleBackdropClick}>
       <div className="modal-content">
-        <h3>{title}</h3>
-        <p>{message}</p>
+        <h3>Are you sure?</h3>
+        <p>Are you sure you want to delete this course?</p>
         <div className="modal-actions">
-          <button className="r-button confirm-button" onClick={onConfirm}>
-            Confirm
-          </button>
-          <button className="g-button cancel-button" onClick={onCancel}>
+          <button className="cancel-button" onClick={onCancel}>
             Cancel
+          </button>
+          <button className="confirm-button" onClick={onConfirm} autoFocus>
+            Delete
           </button>
         </div>
       </div>

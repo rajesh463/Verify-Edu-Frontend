@@ -49,6 +49,7 @@ form {
 /* Password Container */
 .password-container {
   position: relative;
+  width: 100%;
 }
 
 /* Show Password Button */
@@ -59,22 +60,39 @@ form {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #666;
+  color: #8b0000;
   cursor: pointer;
-  font-size: 13px;
-  padding: 5px;
+  font-size: 11px;
+  padding: 2px 5px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 .show-password-btn:hover {
-  color: #4a90e2;
+  color: #a00000;
+}
+
+.show-password-btn:focus {
+  outline: none;
+}
+
+/* Ensure password input doesn't overlap button */
+.password-container .form-input {
+  padding-right: 45px;
 }
 
 /* Submit Button */
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background: #4a90e2;
-  color: white;
+  background: #8b0000;
+  color: #8b0000;
   border: none;
   border-radius: 6px;
   font-size: 16px;

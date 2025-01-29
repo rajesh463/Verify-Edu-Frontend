@@ -10,15 +10,8 @@ import App from "./App";
 import ProtectedRoute from "./components/Navigation/ProtectedRoute";
 import AccessDenied from "./Pages/AccessDenied";
 import Profile from "./Pages/Profile";
-
-// Create a wrapper component that combines ProtectedRoute and FormProvider
-const ProtectedProfileWithForm = () => (
-  <ProtectedRoute roles={["ve_student"]}>
-    <FormProvider>
-      <Profile />
-    </FormProvider>
-  </ProtectedRoute>
-);
+import Locations from "./Pages/Admin/Locations";
+import VerifyDocument from "./features/Verification-Request/VerifyDocument";
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +39,7 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "/aboutus",
         Component: AboutUs,
@@ -60,7 +54,37 @@ export const router = createBrowserRouter([
       },
       {
         path: "/student-profile",
-        Component: ProtectedProfileWithForm,
+        Component: () => (
+          <ProtectedRoute roles={["ve_student"]}>
+            <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/verify-document",
+        Component: () => (
+          <ProtectedRoute roles={["ve_student"]}>
+            <VerifyDocument />
+          </ProtectedRoute>
+        ),
+      },
+      // Admin Rooutes
+
+      {
+        path: "/admin-dashboard",
+        Component: () => (
+          <ProtectedRoute roles={["ve_admin"]}>
+            <StudentDashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/locations",
+        Component: () => (
+          <ProtectedRoute roles={["ve_admin"]}>
+            <Locations />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

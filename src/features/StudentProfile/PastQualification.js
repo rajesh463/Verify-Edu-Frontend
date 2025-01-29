@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Services from "../../services/Services";
 import "./PastQualification.css";
 import { useAuth } from "../../context/AuthContext";
-import SuccessModal from "../../components/FeedbackComponents/Sucess/SuccessModal";
+import SuccessModal from "../../components/FeedbackComponents/Success/SuccessModal";
 import FileUpload from "../../components/File/FileUpload";
 import ViewFile from "../../components/File/ViewFile";
 import SelectInput from "../../components/FormInput/SelectInput";
+import AgGridTable from "../../components/FormInput/AgGridTable";
+import ConfirmationModal from "../../components/FeedbackComponents/Confirmation/ConfirmationModal";
+// import ViewFileWithHandler from "../../components/File/ViewFileWithHandler";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
+import { FaTrash, FaEye } from "react-icons/fa";
 
 const PastQualification = () => {
   const { user } = useAuth();
@@ -27,9 +33,10 @@ const PastQualification = () => {
     attempts: "",
     marksheetFile: null,
   });
+  const [qualifications, setQualifications] = useState([]);
   const [statusOptions, setStatusOptions] = useState([
     { _id: "completed", name: "Completed", value: "Completed" },
-    { _id: "pursuing", name: "Pursuing", value: "Pursuing" },
+    // { _id: "pursuing", name: "Pursuing", value: "Pursuing" },
   ]);
   const [resultsOptions, setResultsOptions] = useState([
     { _id: "pass", name: "Pass", value: "Pass" },
@@ -63,7 +70,7 @@ const PastQualification = () => {
   const [courses, setCourses] = useState([]);
   const [boards, setBoards] = useState([]);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [fileKey, setFileKey] = useState(null);
 
@@ -80,90 +87,120 @@ const PastQualification = () => {
     description: "",
   });
 
+  // Add new states for AG Grid
+  const [gridReady, setGridReady] = useState(false);
+  const gridRef = useRef();
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [selectedQualification, setSelectedQualification] = useState(null);
+  const [showViewModal, setShowViewModal] = useState(false);
+  const [selectedFileTag, setSelectedFileTag] = useState(null);
+
+  // Add new error state for specific form fields
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  const columnDefs = [
+    { field: "qualificationLevel.name", headerName: "Qualification" },
+    { field: "stream.name", headerName: "Stream" },
+    { field: "completed", headerName: "Status" },
+    { field: "instituteName.name", headerName: "Institute" },
+    { field: "boardUniversity.name", headerName: "Board/University" },
+    { field: "mode", headerName: "Mode" },
+    { field: "passingYear", headerName: "Passing Year" },
+    { field: "percentage", headerName: "Percentage" },
+    {
+      headerName: "Actions",
+      cellRenderer: (params) => (
+        <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+          <button onClick={() => handleViewMarksheet(params.data)}>
+            <FaEye />
+          </button>
+          <button onClick={() => handleDeleteClick(params.data)}>
+            <FaTrash />
+          </button>
+        </div>
+      ),
+    },
+  ];
+
+  const defaultColDef = {
+    flex: 1,
+    minWidth: 100,
+    sortable: true,
+    filter: true,
+    resizable: true,
+  };
+
   useEffect(() => {
-    const fetchPastQualification = async () => {
-      try {
-        setLoading(true);
-        const response = await Services.getPastQualification(user.email);
-        if (response.data.success) {
-          const data = response.data.data;
-
-          // Update form data and selected values
-          setFormData({
-            qualificationLevel: data.qualificationLevel?._id || "",
-            stream: data.stream?._id || "",
-            completed: data.completed || "Completed",
-            instituteState: data.instituteState?._id || "",
-            instituteDistrict: data.instituteDistrict?._id || "",
-            instituteTaluka: data.instituteTaluka?._id || "",
-            instituteName: data.instituteName?._id || "",
-            boardUniversity: data.boardUniversity?._id || "",
-            mode: data.mode || "Regular",
-            admissionYear: data.admissionYear || "",
-            passingYear: data.passingYear || "",
-            result: data.result || "",
-            percentage: data.percentage || "",
-            attempts: data.attempts || "",
-            marksheetFile: data.marksheetFile || null,
-          });
-
-          // Update selected values
-          setSelectedQualificationLevel(data.qualificationLevel?._id || "");
-          setSelectedStream(data.stream?._id || "");
-          setSelectedStatus(data.completed || "Completed");
-          setSelectedState(data.instituteState?._id || "");
-          setSelectedDistrict(data.instituteDistrict?._id || "");
-          setSelectedTaluka(data.instituteTaluka?._id || "");
-          setSelectedInstitute(data.instituteName?._id || "");
-          setSelectedBoardUniversity(data.boardUniversity?._id || "");
-          setSelectedMode(data.mode || "Regular");
-          setSelectedAdmissionYear(data.admissionYear || "");
-          setSelectedPassingYear(data.passingYear || "");
-          setSelectedResult(data.result || "");
-          setSelectedPercentage(data.percentage || "");
-          setSelectedAttempts(data.attempts || "");
-
-          // Fetch dependent data based on selected values
-          if (data.qualificationLevel?._id) {
-            const streamsResponse = await Services.getStreams(
-              data.qualificationLevel._id
-            );
-            setStreams(streamsResponse.data.data || []);
-          }
-
-          if (data.instituteState?._id) {
-            const districtsResponse = await Services.getDistricts(
-              data.instituteState._id
-            );
-            setDistricts(districtsResponse.data.data || []);
-          }
-
-          if (data.instituteDistrict?._id) {
-            const talukasResponse = await Services.getTalukas(
-              data.instituteDistrict._id
-            );
-            setTalukas(talukasResponse.data.data || []);
-          }
-
-          if (data.instituteTaluka?._id) {
-            const collegesResponse = await Services.getInstitutes(
-              data.instituteTaluka._id
-            );
-            setInstitutes(collegesResponse.data.data || []);
-          }
-        }
-      } catch (err) {
-        setError(err.message);
-        console.error("Error fetching past qualification:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (user?.email) {
-      fetchPastQualification();
+      fetchQualifications();
     }
   }, [user?.email]);
+
+  const fetchQualifications = async () => {
+    try {
+      setLoading(true);
+      const response = await Services.getPastQualifications(user.email);
+      if (response.data.success) {
+        setQualifications(response.data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching qualifications:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteClick = (qualification) => {
+    setSelectedQualification(qualification);
+    setShowConfirmModal(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    const qualification = selectedQualification;
+    try {
+      setLoading(true);
+      console.log("Deleting qualification with params:", {
+        userId: user.email,
+        qualificationId: qualification.qualificationLevel._id,
+      });
+      if (!qualification.qualificationLevel._id) {
+        return;
+      }
+
+      const deleteObject = {
+        userId: user.email,
+        qualificationId: qualification.qualificationLevel._id,
+      };
+      const response = await Services.deletePastQualification(deleteObject);
+
+      if (response.data.success) {
+        await fetchQualifications();
+      }
+    } catch (error) {
+      console.error("Error deleting qualification:", error);
+    } finally {
+      setShowConfirmModal(false);
+      setSelectedQualification(null);
+      setLoading(false);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setShowConfirmModal(false);
+    setSelectedQualification(null);
+  };
+
+  const handleViewMarksheet = (qualification) => {
+    const tag = `${qualification.qualificationLevel.name}-${qualification.stream.name}-${qualification.boardUniversity.name}`;
+    setSelectedFileTag(tag);
+    setShowViewModal(true);
+  };
+
+  const handleCloseViewModal = () => {
+    setShowViewModal(false);
+    setSelectedFileTag(null);
+  };
 
   const handleQualificationChange = async (e) => {
     const value = e.target.value;
@@ -171,10 +208,18 @@ const PastQualification = () => {
     setFormData((prev) => ({ ...prev, qualificationLevel: value }));
 
     try {
+      setLoading(true);
       const response = await Services.getStreams(value);
+      if (!response?.data?.success) {
+        throw new Error(response?.data?.message || "Failed to fetch streams");
+      }
       setStreams(response?.data?.data || []);
+      setFieldErrors((prev) => ({ ...prev, qualificationLevel: null }));
     } catch (error) {
-      setError(error.message);
+      setError(`Error loading streams: ${error.message}`);
+      setStreams([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -196,7 +241,8 @@ const PastQualification = () => {
     setSelectedInstitute(value);
     setFormData((prev) => ({ ...prev, instituteName: value }));
     try {
-      const response = await Services.getCourses(value);
+      const response = await Services.getCoursesByLevelStream(value);
+      console.log(response);
       setCourses(response?.data?.data || []);
     } catch (error) {
       setError(error.message);
@@ -315,24 +361,68 @@ const PastQualification = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      const response = await Services.submitPastQualification({
-        userId: user.email,
-        qualificationLevel: selectedQualificationLevel,
-        stream: selectedStream,
-        completed: selectedStatus,
-        instituteState: selectedState,
-        instituteDistrict: selectedDistrict,
-        instituteTaluka: selectedTaluka,
-        instituteName: selectedInstitute,
-        boardUniversity: selectedBoardUniversity,
-        mode: selectedMode,
-        admissionYear: selectedAdmissionYear,
-        passingYear: selectedPassingYear,
-        result: selectedResult,
-        percentage: selectedPercentage,
-        attempts: selectedAttempts,
+      // Validate required fields
+      const requiredFields = {
+        qualificationLevel: "Qualification Level",
+        stream: "Stream",
+        instituteState: "Institute State",
+        instituteDistrict: "Institute District",
+        instituteName: "Institute Name",
+        boardUniversity: "Board/University",
+        mode: "Mode of Study",
+        admissionYear: "Admission Year",
+        passingYear: "Passing Year",
+        result: "Result",
+        percentage: "Percentage",
+        attempts: "Number of Attempts",
+      };
+
+      const errors = {};
+      Object.entries(requiredFields).forEach(([field, label]) => {
+        if (!formData[field]) {
+          errors[field] = `${label} is required`;
+        }
       });
+
+      // Validate percentage range
+      if (
+        formData.percentage &&
+        (formData.percentage < 0 || formData.percentage > 100)
+      ) {
+        errors.percentage = "Percentage must be between 0 and 100";
+      }
+
+      // Validate admission and passing years
+      const currentYear = new Date().getFullYear();
+      if (
+        formData.admissionYear &&
+        (formData.admissionYear < 1900 || formData.admissionYear > currentYear)
+      ) {
+        errors.admissionYear = `Admission year must be between 1900 and ${currentYear}`;
+      }
+      if (
+        formData.passingYear &&
+        (formData.passingYear < formData.admissionYear ||
+          formData.passingYear > currentYear)
+      ) {
+        errors.passingYear = `Passing year must be between admission year and ${currentYear}`;
+      }
+
+      if (Object.keys(errors).length > 0) {
+        setFieldErrors(errors);
+        setError("Please correct the errors in the form");
+        return;
+      }
+
+      setLoading(true);
+      setFormData((prev) => ({ ...prev, marksheetFile: fileKey }));
+
+      const submitData = {
+        ...formData,
+        userId: user.email,
+      };
+
+      const response = await Services.submitPastQualification(submitData);
 
       if (response.data.success) {
         setSuccessData({
@@ -341,9 +431,17 @@ const PastQualification = () => {
             "Past qualification details have been successfully saved.",
         });
         setShowSuccessModal(true);
+        await fetchQualifications();
+        // Clear form and errors after successful submission
+        setFieldErrors({});
+        setError(null);
       }
     } catch (err) {
-      setError(err.message);
+      const errorMessage =
+        err.response?.data?.message ||
+        err.message ||
+        "An error occurred while saving qualification";
+      setError(errorMessage);
       console.error("Error submitting past qualification:", err);
     } finally {
       setLoading(false);
@@ -352,6 +450,11 @@ const PastQualification = () => {
 
   const handleCloseSuccessModal = () => {
     setShowSuccessModal(false);
+  };
+
+  // Grid ready handler
+  const onGridReady = (params) => {
+    params.api.sizeColumnsToFit();
   };
 
   if (loading) {
@@ -370,7 +473,11 @@ const PastQualification = () => {
             value={selectedQualificationLevel}
             onChange={handleQualificationChange}
             required
+            error={fieldErrors.qualificationLevel}
           />
+          {fieldErrors.qualificationLevel && (
+            <span className="error-text">{fieldErrors.qualificationLevel}</span>
+          )}
         </div>
 
         <div className="form-group">
@@ -537,23 +644,109 @@ const PastQualification = () => {
           <div className="upload-container">
             <FileUpload tag={tag} setFileKey={setFileKey} />
           </div>
-          <div className="view-container">
-            <ViewFile tag={tag} />
-          </div>
+          {fileKey && (
+            <div className="view-container">
+              <ViewFile tag={tag} />
+            </div>
+          )}
+        </div>
+      )}
+
+      {error && (
+        <div
+          className="error-message"
+          style={{
+            marginTop: "10px",
+            color: "red",
+            padding: "10px",
+            backgroundColor: "#ffe6e6",
+            borderRadius: "4px",
+          }}
+        >
+          {error}
         </div>
       )}
       <button onClick={handleSubmit} disabled={loading}>
-        {loading ? "Saving..." : "Submit"}
+        {loading ? "Saving..." : "Save"}
       </button>
-
+      <div style={{ marginTop: "20px" }}>
+        <h3>Qualification History</h3>
+        <div className="table-container">
+          {loading ? (
+            <div className="loading-spinner">Loading...</div>
+          ) : (
+            <table className="qualifications-table">
+              <thead>
+                <tr>
+                  <th>Qualification</th>
+                  <th>Stream</th>
+                  <th>Institute</th>
+                  <th>Board/University</th>
+                  <th>Mode</th>
+                  <th>Passing Year</th>
+                  <th>Percentage</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {qualifications.map((qual) => (
+                  <tr key={qual._id}>
+                    <td>{qual.qualificationLevel?.name}</td>
+                    <td>{qual.stream?.name}</td>
+                    <td>{qual.instituteName?.name}</td>
+                    <td>{qual.boardUniversity?.name}</td>
+                    <td>{qual.mode}</td>
+                    <td>{qual.passingYear}</td>
+                    <td>{qual.percentage}%</td>
+                    <td>
+                      <div className="action-buttons">
+                        <ViewFile
+                          tag={`${qual.qualificationLevel._id}-${qual.stream._id}-${qual.boardUniversity._id}`}
+                        />
+                        <button
+                          onClick={() => handleDeleteClick(qual)}
+                          className="delete-btn"
+                          title="Delete"
+                          disabled={loading}
+                        >
+                          <FaTrash />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+          {!loading && qualifications.length === 0 && (
+            <div className="no-data">No qualifications found</div>
+          )}
+        </div>
+      </div>
       {/* Success Modal */}
       {showSuccessModal && (
         <SuccessModal onClose={handleCloseSuccessModal} data={successData} />
       )}
 
-      {error && <div className="error-message">{error}</div>}
+      {/* Confirmation Modal */}
+      {showConfirmModal && (
+        <ConfirmationModal
+          title="Delete Qualification"
+          message={`Are you sure you want to delete ${selectedQualification?.qualificationLevel?.name} qualification?`}
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+        />
+      )}
+
+      {/* {showViewModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <button onClick={handleCloseViewModal}>Close</button>
+            <ViewFile tag={selectedFileTag} />
+          </div>
+        </div>
+      )} */}
     </div>
   );
 };
-
 export default PastQualification;

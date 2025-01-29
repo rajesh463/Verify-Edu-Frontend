@@ -25,14 +25,19 @@
 }
 
 .user-info {
-  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .user-info p {
   margin: 0;
-  font-size: 0.9rem;
-  color: #666666; /* Darker gray for "Welcome!" */
-  font-weight: 500;
+  color: #333;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #8b0000 !important;
 }
 
 .user-info h1 {

@@ -110,7 +110,7 @@ const FileUpload = ({ tag, setFileKey }) => {
           </button>
         )}
 
-        {(isUploading || uploadProgress > 0) && (
+        {(isUploading || (uploadProgress > 0 && uploadProgress < 100)) && (
           <div className="upload-progress-container">
             <div className="upload-progress-bar">
               <div
