@@ -10,7 +10,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "",
+    role: "student",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -69,6 +69,10 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormData({
+      ...formData,
+      role: "student",
+    });
     const validationErrors = validateFields();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
@@ -119,20 +123,20 @@ const Register = () => {
         <div className="form-group">
           <div className="password-container">
             <input
-              type={showPassword ? "text" : "password"} // Toggle password visibility
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Password"
               value={formData.password}
               onChange={handleInputChange}
               className={`form-input ${errors.password ? "error" : ""}`}
             />
-            <button
+            {/* <button
               type="button"
               className="show-password-btn"
-              onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+              onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? "Hide" : "Show"}
-            </button>
+            </button> */}
           </div>
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
@@ -140,38 +144,40 @@ const Register = () => {
         <div className="form-group">
           <div className="password-container">
             <input
-              type={showCPassword ? "text" : "password"} // Toggle password visibility
+              type={showCPassword ? "text" : "password"}
               name="confirmPassword"
               placeholder="Confirm Password"
               value={formData.confirmPassword}
               onChange={handleInputChange}
-              className={`form-input ${errors.password ? "error" : ""}`}
+              className={`form-input ${errors.confirmPassword ? "error" : ""}`}
             />
-            <button
+            {/* <button
               type="button"
               className="show-password-btn"
-              onClick={() => setShowCPassword(!showCPassword)} // Toggle password visibility
+              onClick={() => setShowCPassword(!showCPassword)}
             >
               {showCPassword ? "Hide" : "Show"}
-            </button>
+            </button> */}
           </div>
-          {errors.password && <p className="error-text">{errors.password}</p>}
+          {errors.confirmPassword && (
+            <p className="error-text">{errors.confirmPassword}</p>
+          )}
         </div>
 
         <div className="form-group">
-          <select
+          {/* <select
             name="role"
             value={formData.role}
             onChange={handleInputChange}
-            className="form-select"
+            className="form-input"
           >
-            <option disabled value="">
+            <option value="" disabled>
               Select Role
             </option>
             <option value="student">Student</option>
             <option value="institute">Institute</option>
             <option value="admin">Admin</option>
-          </select>
+          </select> */}
         </div>
         <button type="submit" className="submit-btn">
           Register

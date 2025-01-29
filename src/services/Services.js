@@ -66,6 +66,10 @@ export default {
   getStates: async () => {
     return apiServiceBased.get(`${LOCATION}/states`);
   },
+  addState: async (state) => {
+    console.log(state);
+    return apiServiceBased.post(`${LOCATION}/states`, state);
+  },
   getDistricts: async (stateId) => {
     return apiServiceBased.get(`${LOCATION}/districts/${stateId}`);
   },
@@ -82,9 +86,7 @@ export default {
     console.log(talukaId);
     return apiServiceBased.get(`${INSTITUTE}/by-taluka/${talukaId}`);
   },
-  getCourses: async (collegeId) => {
-    return apiServiceBased.get(`${EDUCATION}/courses/${collegeId}`);
-  },
+
   getBoards: async () => {
     return apiServiceBased.get(`${EDUCATION}/boards`);
   },
@@ -102,7 +104,7 @@ export default {
   },
   getPastQualification: async (userId) => {
     return apiServiceBased.get(
-      `${STUDENT}/past-qualification?userId=${encodeURIComponent(userId)}`
+      `${STUDENT}/past-qualifications?userId=${encodeURIComponent(userId)}`
     );
   },
   submitCurrentCourse: async (formData) => {
@@ -154,5 +156,32 @@ export default {
     } catch (error) {
       throw error;
     }
+  },
+  getCurrentCourses: async (userId) => {
+    return apiServiceBased.get(
+      `${STUDENT}/current-courses?userId=${encodeURIComponent(userId)}`
+    );
+  },
+  submitCurrentCourse: async (userId, courseData) => {
+    return apiServiceBased.post(
+      `${STUDENT}/current-course?userId=${userId}`,
+      courseData
+    );
+  },
+  updateCurrentCourse: async (courseId, courseData) => {
+    return apiServiceBased.put(
+      `${STUDENT}/current-course/${courseId}`,
+      courseData
+    );
+  },
+  deleteCurrentCourse: async (formData) => {
+    return apiServiceBased.delete(`${STUDENT}/current-course`, formData);
+  },
+  updateState: async (id, stateData) => {
+    return apiServiceBased.put(`${LOCATION}/states/${id}`, stateData);
+  },
+
+  deleteState: async (id) => {
+    return apiServiceBased.delete(`${LOCATION}/states/${id}`);
   },
 };

@@ -6,7 +6,7 @@ import SelectInput from "../../components/FormInput/SelectInput";
 import Service from "../../services/Services";
 import Tag from "../../constant/Tag";
 import { useAuth } from "../../context/AuthContext";
-import SuccessModal from "../../components/FeedbackComponents/Sucess/SuccessModal";
+import SuccessModal from "../../components/FeedbackComponents/Success/SuccessModal";
 
 import "./PersonalInformation.css";
 
@@ -378,10 +378,9 @@ const PersonalInformation = () => {
         {state.casteCategory && state.casteCategory !== "general" && (
           <>
             <div className="form-group">
-              <label>Do you have a Caste Certificate?</label>
               <SelectInput
                 name="hasCasteCertificate"
-                label="Caste Certificate"
+                label="Do you have a Caste Certificate?"
                 value={selectedHasCasteCertificate || ""}
                 options={casteCertificateYesNoOptions}
                 onChange={handleChange}

@@ -18,12 +18,16 @@ export const AuthProvider = ({ children }) => {
     email: "",
     role: "",
   });
+  // Add loading state
+  const [loading, setLoading] = useState(true);
 
   // Load the user from localStorage or API when the app mounts
   useEffect(() => {
     const token = localStorage.getItem("ve-token");
     if (token) {
       getProfile();
+    } else {
+      setLoading(false); // Set loading to false if no token exists
     }
   }, []);
 
@@ -41,6 +45,8 @@ export const AuthProvider = ({ children }) => {
       console.error("Error fetching profile:", error);
       setUser(null); // Ensure the user is cleared if fetching fails
       throw new Error("Failed to fetch user profile.");
+    } finally {
+      setLoading(false); // Set loading to false whether successful or not
     }
   };
 
@@ -62,7 +68,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

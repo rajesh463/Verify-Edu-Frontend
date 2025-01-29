@@ -31,13 +31,13 @@ const ConfirmationModal = ({ title, message, onConfirm, onCancel }) => {
   return (
     <div className="modal-backdrop" onClick={handleBackdropClick}>
       <div className="modal-content">
-        <h3>{title}</h3>
-        <p>{message}</p>
+        <h3>Are you sure?</h3>
+        <p>Are you sure you want to delete this course?</p>
         <div className="modal-actions">
-          <button className="cancel-button" onClick={onCancel} autoFocus>
+          <button className="cancel-button" onClick={onCancel}>
             Cancel
           </button>
-          <button className="confirm-button" onClick={onConfirm}>
+          <button className="confirm-button" onClick={onConfirm} autoFocus>
             Delete
           </button>
         </div>

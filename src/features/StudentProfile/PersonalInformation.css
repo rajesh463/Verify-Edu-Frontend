@@ -1,77 +1,178 @@
-/* Personal Information Section */
-.personal-info-section {
-  background-color: #f9f9f9;
-  padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-/* Religious Data Section */
-.religious-data-section {
-  background-color: #f1f1f1;
-  padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-/* Caste Section */
+/* Main container */
+.personal-info-section,
+.religious-data-section,
 .caste-section {
-  background-color: #f7f7f7;
-  padding: 20px;
-  margin-bottom: 30px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 30px;
+  background: white;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* File Upload Section */
-.file-upload-section {
-  background-color: #f3f3f3;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
+/* Section headers */
+h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #4caf50;
+  grid-column: 1 / -1;
 }
 
-/* Form Container and Layout */
+/* Form grid layout - Removed nested div selector */
+.personal-info-section,
+.religious-data-section,
+.caste-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Form groups */
 .form-group {
   margin-bottom: 20px;
+  /* Reset any inherited grid properties */
+  grid-column: auto;
 }
 
-/* Error Message Styling */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Error messages */
 .error-message {
   color: #ff4d4d;
   font-size: 0.875rem;
   margin-top: 5px;
+}
+
+/* File upload section */
+.file-upload-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+  width: 100%;
+}
+
+.upload-container,
+.view-container {
+  margin: 10px 0;
+}
+
+/* Submit button */
+.submit-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 20px auto;
+  width: 200px;
+  transition: background-color 0.3s ease;
   display: block;
 }
 
-/* Input and Select Styling */
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Button Styling */
-.button-container {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
+.submit-btn:hover {
   background-color: #45a049;
+}
+
+.submit-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Loading state */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  grid-column: 1 / -1;
+}
+
+/* Caste certificate section */
+.caste-certificate-section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  grid-column: 1 / -1;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  .personal-info-section,
+  .religious-data-section,
+  .caste-section {
+    padding: 20px;
+    margin: 10px;
+    grid-template-columns: 1fr;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}
+
+
+
+/* Required field indicator */
+.form-group label.required::after {
+  content: "*";
+  color: #ff4d4d;
+  margin-left: 4px;
+}
+
+/* Select input specific styles */
+.select-input {
+  position: relative;
+  width: 100%;
+}
+
+.select-input select {
+  appearance: none;
+  padding-right: 30px;
+  width: 100%;
+}
+
+.select-input::after {
+  content: "▼";
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }

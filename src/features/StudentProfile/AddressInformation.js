@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Services from "../../services/Services";
-import "./AddressInformation.css";
+
 import SelectInput from "../../components/FormInput/SelectInput";
 import { useAuth } from "../../context/AuthContext";
-import SuccessModal from "../../components/FeedbackComponents/Sucess/SuccessModal";
+import SuccessModal from "../../components/FeedbackComponents/Success/SuccessModal";
 
 const AddressInformation = () => {
   const { user } = useAuth();
@@ -64,9 +64,24 @@ const AddressInformation = () => {
                   sameAsPermanent: checked,
                 }
               : {
-                  ...prevState.addresses.currentAddress,
+                  // Reset current address fields when unchecking
+                  addressLine1: "",
+                  addressLine2: "",
+                  state: "",
+                  district: "",
+                  taluka: "",
+                  village: "",
+                  pincode: "",
                   sameAsPermanent: checked,
                 },
+          },
+          // Reset the current address data when unchecking
+          addressData: {
+            ...prevState.addressData,
+            current: {
+              districts: [],
+              talukas: [],
+            },
           },
         };
       }
@@ -322,6 +337,7 @@ const AddressInformation = () => {
       const formData = {
         permanentAddress: formState.addresses.permanentAddress,
         currentAddress: formState.addresses.currentAddress,
+        userId: user.email,
       };
 
       const response = await Services.submitAddressInfo(formData);
@@ -343,11 +359,13 @@ const AddressInformation = () => {
   };
 
   return (
-    <div className="personal-info-section">
+    <div className="address-info-container">
       <h2>Address Information</h2>
-      <AddressForm type="permanent" />
+      <div className="address-form-container">
+        <AddressForm type="permanent" />
+      </div>
 
-      <div className="form-group checkbox-group">
+      <div className="checkbox-group">
         <label>
           <input
             type="checkbox"
@@ -355,13 +373,14 @@ const AddressInformation = () => {
             checked={formState.addresses.currentAddress.sameAsPermanent}
             onChange={handleChange}
           />
-          Same as Permanent Address
+          <span>Same as Permanent Address</span>
         </label>
       </div>
-
-      {!formState.addresses.currentAddress.sameAsPermanent && (
-        <AddressForm type="current" />
-      )}
+      <div className="address-form-container">
+        {!formState.addresses.currentAddress.sameAsPermanent && (
+          <AddressForm type="current" />
+        )}
+      </div>
 
       <button onClick={handleSave}>Save</button>
 

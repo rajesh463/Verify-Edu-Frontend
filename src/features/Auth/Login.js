@@ -61,31 +61,28 @@ const Login = () => {
 
     try {
       setLoadingModel(true);
+      setErrors(""); // Clear previous errors
+
       const res = await Services.login(formData);
-      const token = res?.data?.token;
 
-      if (!token) {
-        setErrors("Failed to retrieve token. Please try again.");
-        setLoadingModel(false);
-        return;
+      if (!res?.data?.token) {
+        throw new Error("Invalid credentials. Please try again.");
       }
 
-      try {
-        const user = await login(token); // Call login with token
-        if (user) {
-          navigateTo(user.role);
-        } else {
-          setErrors("Failed to load user profile. Please try again.");
-        }
-      } catch (error) {
-        console.error("Profile loading error:", error);
-        setErrors(error.message || "An error occurred.");
+      const user = await login(res.data.token);
+      if (!user) {
+        throw new Error("Failed to load user profile. Please try again.");
       }
 
-      setLoadingModel(false);
+      navigateTo(user.role);
     } catch (error) {
-      console.error("Login request error:", error);
-      setErrors(error.message || "An error occurred.");
+      console.error("Login error:", error);
+      setErrors(
+        error.response?.data?.message ||
+          error.message ||
+          "An unexpected error occurred. Please try again."
+      );
+    } finally {
       setLoadingModel(false);
     }
   };
@@ -142,14 +139,14 @@ const Login = () => {
         <button type="submit" className="submit-btn">
           Login
         </button>
-        <div className="sign-in-link">
+        {/* <div className="sign-in-link">
           <p>
             Create an Account?{" "}
             <Link to="/register" className="link">
               Register
             </Link>
           </p>
-        </div>
+        </div> */}
       </form>
       {loadingModel && <LoadingSpinner />}
     </div>

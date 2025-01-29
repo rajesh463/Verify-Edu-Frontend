@@ -1,155 +1,303 @@
-.navbar {
+.top-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 60px;
-  background: #ffffff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  background: #1a237e; /* MAHA DBTE primary dark blue */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 1000;
-  display: flex;
-  align-items: center;
+  backdrop-filter: blur(8px);
 }
 
-.navbar-container {
-  width: 100%;
-  height: 100%;
+.top-navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  align-items: center;
+  height: 100%;
+  padding: 0 2rem;
+  max-width: 100%;
+  background-color: #610c0c;
+  margin: 0 auto;
+  position: relative;
 }
 
-/* Left section with logo */
 .navbar-left {
   display: flex;
   align-items: center;
-}
-
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  gap: 0.75rem;
-}
-
-.navbar-logo {
-  height: 35px;
-  width: auto;
-  object-fit: contain;
+  gap: 1.5rem;
 }
 
 .navbar-title {
-  color: #333333;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  white-space: nowrap;
+  color: #f0eaea;
+  text-decoration: none;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Center section with navigation links */
-.navbar-center {
-  display: none; /* Hide center navigation as per MAHADBT design */
-}
-
-/* Right section with user info */
 .navbar-right {
   display: flex;
   align-items: center;
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: #f5f5f5;
-  padding: 6px 12px;
-  border-radius: 4px;
-}
-
-.welcome-text {
-  color: #666666;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-
-.user-name {
-  color: #333333;
-  font-weight: 600;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-
-.logout-button {
-  background: transparent;
-  border: 1px solid #8b0000;
-  color: #8b0000;
-  padding: 4px 12px;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.logout-button:hover {
-  background: #8b0000;
-  color: #ffffff;
-}
-
-/* Add these styles to your existing Navbar.css */
-
-.auth-buttons {
+.navbar-actions {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.login-button {
-  background: transparent;
-  border: 1px solid #8b0000;
-  color: #8b0000;
-  padding: 6px 16px;
-  border-radius: 3px;
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px solid #475569;
+  background: #9c5383;
+  color: #ffffff;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
   transition: all 0.2s ease;
-  white-space: nowrap;
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  border: 2px solid #1a1f37;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.icon-button:hover {
+  background: #64748b;
+  border-color: #64748b;
+}
+
+.user-profile {
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.profile-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #4737d7;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.user-info {
+  display: none;
+}
+
+.dropdown-icon {
+  color: #94a3b8;
+  font-size: 0.875rem;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #dc2626;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logout-button:hover {
+  background: #2d41c6;
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background: #4737d7;
+  color: white;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .login-button:hover {
-  background: #8b0000;
-  color: #ffffff;
+  background: #283593; /* Darker blue on hover */
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-  .navbar-container {
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  z-index: 1000;
+  padding: 0.5rem 0;
+  border: 1px solid #e0e0e0;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  background: white;
+  border: none;
+  color: #333;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #8b0000;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .top-navbar {
     padding: 0 1rem;
   }
 
   .navbar-title {
-    font-size: 1rem;
-  }
-
-  .welcome-text {
     display: none;
   }
 
   .user-info {
-    gap: 0.5rem;
-    padding: 4px 8px;
+    display: none;
   }
 
-  .logout-button {
-    padding: 3px 8px;
-    font-size: 0.8rem;
+  .dropdown-icon {
+    display: none;
   }
+}
 
-  .login-button {
-    padding: 4px 12px;
-    font-size: 0.85rem;
-  }
+/* Sidebar adjustments - increased contrast */
+.sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  background: #1e293b;
+  z-index: 100;
+  transition: width 0.3s ease;
+}
+
+.sidebar-link {
+  color: #f1f5f9; /* Brighter text color */
+  font-weight: 500;
+}
+
+.sidebar-icon {
+  color: #94a3b8; /* Brighter icon color */
+}
+
+.sidebar-link:hover {
+  background: #334155;
+}
+
+.sidebar-link.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.sidebar.collapsed {
+  width: 64px;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.auth-button {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #e3dcdc;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: all 0.2s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent; /* Remove mobile tap highlight */
+}
+
+.auth-button:focus,
+.auth-button:active,
+.auth-button:hover {
+  outline: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+}
+
+.login-button:hover,
+.register-button:hover {
+  color: #ec4261;
+}
+
+/* Remove default link styles */
+a {
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus,
+a:active,
+a:hover {
+  outline: none;
+  box-shadow: none;
+  text-decoration: none;
 }

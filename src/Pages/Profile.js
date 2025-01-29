@@ -72,11 +72,7 @@ const Profile = () => {
             >
               Next
             </button>
-          ) : (
-            <button className="btn-primary" onClick={() => alert("Submitted!")}>
-              Submit
-            </button>
-          )}
+          ) : null}
         </div>
       </div>
     </div>

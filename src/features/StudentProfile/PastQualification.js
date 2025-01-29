@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Services from "../../services/Services";
 import "./PastQualification.css";
 import { useAuth } from "../../context/AuthContext";
-import SuccessModal from "../../components/FeedbackComponents/Sucess/SuccessModal";
+import SuccessModal from "../../components/FeedbackComponents/Success/SuccessModal";
 import FileUpload from "../../components/File/FileUpload";
 import ViewFile from "../../components/File/ViewFile";
 import SelectInput from "../../components/FormInput/SelectInput";
@@ -36,7 +36,7 @@ const PastQualification = () => {
   const [qualifications, setQualifications] = useState([]);
   const [statusOptions, setStatusOptions] = useState([
     { _id: "completed", name: "Completed", value: "Completed" },
-    { _id: "pursuing", name: "Pursuing", value: "Pursuing" },
+    // { _id: "pursuing", name: "Pursuing", value: "Pursuing" },
   ]);
   const [resultsOptions, setResultsOptions] = useState([
     { _id: "pass", name: "Pass", value: "Pass" },
@@ -156,7 +156,8 @@ const PastQualification = () => {
     setShowConfirmModal(true);
   };
 
-  const handleConfirmDelete = async (qualification) => {
+  const handleConfirmDelete = async () => {
+    const qualification = selectedQualification;
     try {
       setLoading(true);
       console.log("Deleting qualification with params:", {
@@ -240,7 +241,8 @@ const PastQualification = () => {
     setSelectedInstitute(value);
     setFormData((prev) => ({ ...prev, instituteName: value }));
     try {
-      const response = await Services.getCourses(value);
+      const response = await Services.getCoursesByLevelStream(value);
+      console.log(response);
       setCourses(response?.data?.data || []);
     } catch (error) {
       setError(error.message);
@@ -642,9 +644,11 @@ const PastQualification = () => {
           <div className="upload-container">
             <FileUpload tag={tag} setFileKey={setFileKey} />
           </div>
-          <div className="view-container">
-            <ViewFile tag={tag} />
-          </div>
+          {fileKey && (
+            <div className="view-container">
+              <ViewFile tag={tag} />
+            </div>
+          )}
         </div>
       )}
 
@@ -729,7 +733,7 @@ const PastQualification = () => {
         <ConfirmationModal
           title="Delete Qualification"
           message={`Are you sure you want to delete ${selectedQualification?.qualificationLevel?.name} qualification?`}
-          onConfirm={handleConfirmDelete(selectedQualification)}
+          onConfirm={handleConfirmDelete}
           onCancel={handleCancelDelete}
         />
       )}
