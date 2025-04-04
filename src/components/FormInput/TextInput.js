@@ -1,17 +1,6 @@
 import React from "react";
 
-interface TextInputProps {
-  label: string;
-  name: string;
-  value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  required?: boolean;
-  type?: string;
-  isTextArea?: boolean;
-  rows?: number;
-}
-
-const TextInput: React.FC<TextInputProps> = ({
+const TextInput = ({
   label,
   name,
   value,
@@ -34,7 +23,7 @@ const TextInput: React.FC<TextInputProps> = ({
           onChange={onChange}
           required={required}
           rows={rows}
-          style={{width:"100%"}}
+          style={{ width: "100%" }}
         />
       ) : (
         <input

@@ -11,6 +11,9 @@ import ProtectedRoute from "./components/Navigation/ProtectedRoute";
 import AccessDenied from "./Pages/AccessDenied";
 import Profile from "./Pages/Profile";
 
+import LocationFeature from "./features/Admin/Locations/LocationFeature";
+import AdminDashboard from "./features/Admin/AdminDashboard";
+import EducationFeatures from "./features/Admin/Educations/EducationFeatures";
 // Create a wrapper component that combines ProtectedRoute and FormProvider
 const ProtectedProfileWithForm = () => (
   <ProtectedRoute roles={["ve_student"]}>
@@ -61,6 +64,31 @@ export const router = createBrowserRouter([
       {
         path: "/student-profile",
         Component: ProtectedProfileWithForm,
+      },
+      //admin
+      {
+        path: "/admin-dashboard",
+        Component: () => (
+          <ProtectedRoute roles={["ve_admin"]}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/locations",
+        Component: () => (
+          <ProtectedRoute roles={["ve_admin"]}>
+            <LocationFeature />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/education",
+        Component: () => (
+          <ProtectedRoute roles={["ve_admin"]}>
+            <EducationFeatures />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

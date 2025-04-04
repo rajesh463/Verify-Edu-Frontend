@@ -1,0 +1,141 @@
+.mainContainer {
+  padding: 24px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.content:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.componentContainer {
+  margin-top: 24px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #eef0f7;
+}
+
+.tabContainer {
+  display: flex;
+  gap: 16px;
+  border-bottom: 2px solid #eef0f7;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+}
+
+.tabButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #64748b;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.tabButton:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+.tabButton::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.tabIcon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.tabButton:hover .tabIcon {
+  transform: scale(1.1);
+}
+
+.tabLabel {
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.activeTab {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+.activeTab::after {
+  background-color: #2563eb;
+}
+
+.activeTab:hover {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+/* Animation for component transitions */
+.componentContainer > * {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mainContainer {
+    padding: 16px;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .tabContainer {
+    gap: 8px;
+  }
+
+  .tabButton {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .tabIcon {
+    font-size: 18px;
+  }
+}
