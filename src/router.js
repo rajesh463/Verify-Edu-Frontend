@@ -14,6 +14,7 @@ import Profile from "./Pages/Profile";
 import LocationFeature from "./features/Admin/Locations/LocationFeature";
 import AdminDashboard from "./features/Admin/AdminDashboard";
 import EducationFeatures from "./features/Admin/Educations/EducationFeatures";
+import DemographicFeatures from "./features/Admin/Demographic/DemographicFeatures"
 // Create a wrapper component that combines ProtectedRoute and FormProvider
 const ProtectedProfileWithForm = () => (
   <ProtectedRoute roles={["ve_student"]}>
@@ -87,6 +88,14 @@ export const router = createBrowserRouter([
         Component: () => (
           <ProtectedRoute roles={["ve_admin"]}>
             <EducationFeatures />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/demographic",
+        Component: () => (
+          <ProtectedRoute roles={["ve_admin"]}>
+            <DemographicFeatures />
           </ProtectedRoute>
         ),
       },

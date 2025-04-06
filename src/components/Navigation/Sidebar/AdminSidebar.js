@@ -79,6 +79,17 @@ const AdminSidebar = () => {
                 {!isCollapsed && <span>Education</span>}
               </Link>
             </li>
+            <li>
+              <Link
+                to="/demographic"
+                className={`menu-item ${
+                  isActive("/demographic") ? "active" : ""
+                }`}
+              >
+                <FaChartBar className="icon" />
+                {!isCollapsed && <span>Demographic</span>}
+              </Link>
+            </li>
           </ul>
         </div>
       );
