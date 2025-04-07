@@ -95,7 +95,7 @@ const Login = () => {
     if (role === "ve_student") {
       navigate("/student-dashboard");
     } else if (role === "ve_institute") {
-      navigate("/institute_dashboard");
+      navigate("/institute-dashboard");
     } else if (role === "ve_admin") {
       navigate("/admin-dashboard");
     }

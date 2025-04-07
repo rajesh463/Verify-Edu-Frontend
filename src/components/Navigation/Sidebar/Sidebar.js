@@ -3,6 +3,7 @@ import { useAuth } from "../../../context/AuthContext";
 
 import AdminSidebar from "./AdminSidebar";
 import StudentSidebar from "./StudentSidebar";
+import InstituteSidebar from "./InstituteSidebar";
 const Sidebar = () => {
   const { user } = useAuth();
   const FunReturn = () => {
@@ -10,6 +11,8 @@ const Sidebar = () => {
       return <AdminSidebar />;
     } else if (user?.role == "ve_student") {
       return <StudentSidebar />;
+    } else if (user?.role == "ve_institute") {
+      return <InstituteSidebar />;
     }
     return null; // Default return for when no role matches
   };

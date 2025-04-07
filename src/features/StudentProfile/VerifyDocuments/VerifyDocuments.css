@@ -1,0 +1,42 @@
+.verify-documents-container {
+  padding: 20px;
+}
+
+.verify-documents-title {
+  margin-bottom: 20px;
+}
+
+.verify-documents-table-container {
+  overflow-x: auto;
+}
+
+.verify-documents-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.verify-documents-table th {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+  background-color: #f2f2f2;
+}
+
+.verify-documents-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.verify-documents-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.verify-documents-marksheet-link {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.verify-documents-marksheet-link:hover {
+  text-decoration: underline;
+}

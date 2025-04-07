@@ -22,7 +22,7 @@ export default {
   addTaluka: async (data) => {
     return apiServiceBased.post(`${LOCATION}/talukas`, data);
   },
-  getTalukas: async (districtId) => {
+  getTalukasByDistrictId: async (districtId) => {
     return apiServiceBased.get(`${LOCATION}/talukas/${districtId}`);
   },
   getTalukas: async () => {

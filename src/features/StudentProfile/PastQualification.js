@@ -137,6 +137,14 @@ const PastQualification = () => {
     }
   }, [user?.email]);
 
+  useEffect(() => {
+    if (fileKey)
+      setFormData((prevState) => ({
+        ...prevState,
+        marksheetFile: fileKey,
+      }));
+  }, [fileKey]);
+
   const fetchQualifications = async () => {
     try {
       setLoading(true);
@@ -239,12 +247,12 @@ const PastQualification = () => {
     const { name, value } = e.target;
     setSelectedInstitute(value);
     setFormData((prev) => ({ ...prev, instituteName: value }));
-    try {
-      const response = await Services.getCourses(value);
-      setCourses(response?.data?.data || []);
-    } catch (error) {
-      setError(error.message);
-    }
+    // try {
+    //   const response = await Services.getCourses(value);
+    //   setCourses(response?.data?.data || []);
+    // } catch (error) {
+    //   setError(error.message);
+    // }
   };
   const handleInstituteStateChange = async (e) => {
     const value = e.target.value;

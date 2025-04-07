@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   // Images for the carousel
@@ -37,6 +38,7 @@ const Home = () => {
       <section className="welcome-message">
         <h1>Welcome to the Student Verification Portal</h1>
         <p>Here you can verify students and manage records easily.</p>
+        <Link to="/institute-register">to register as insititute</Link>
       </section>
     </div>
   );

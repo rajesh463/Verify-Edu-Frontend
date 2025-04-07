@@ -16,7 +16,7 @@ import {
 } from "react-icons/fa"; // Import icons from react-icons
 import { useAuth } from "../../../context/AuthContext";
 
-const AdminSidebar = () => {
+const InstituteSidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
   const location = useLocation(); // Get current location
@@ -48,46 +48,13 @@ const AdminSidebar = () => {
           <ul className="sidebar-menu">
             <li>
               <Link
-                to="/admin-dashboard"
+                to="/institute-dashboard"
                 className={`menu-item ${
-                  isActive("/admindashboard") ? "active" : ""
+                  isActive("/institute-dashboard") ? "active" : ""
                 }`}
               >
                 <FaSchool className="icon" />
                 {!isCollapsed && <span>Dashboard</span>}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/locations"
-                className={`menu-item ${
-                  isActive("/locations") ? "active" : ""
-                }`}
-              >
-                <FaUserGraduate className="icon" />
-                {!isCollapsed && <span>Locations</span>}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/education"
-                className={`menu-item ${
-                  isActive("/education") ? "active" : ""
-                }`}
-              >
-                <MdAssignment className="icon" />
-                {!isCollapsed && <span>Education</span>}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/demographic"
-                className={`menu-item ${
-                  isActive("/demographic") ? "active" : ""
-                }`}
-              >
-                <FaChartBar className="icon" />
-                {!isCollapsed && <span>Demographic</span>}
               </Link>
             </li>
           </ul>
@@ -101,4 +68,4 @@ const AdminSidebar = () => {
   return returnFun();
 };
 
-export default AdminSidebar;
+export default InstituteSidebar;

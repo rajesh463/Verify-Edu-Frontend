@@ -126,13 +126,13 @@ const Register = () => {
               onChange={handleInputChange}
               className={`form-input ${errors.password ? "error" : ""}`}
             />
-            <button
+            {/* <button
               type="button"
               className="show-password-btn"
               onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
             >
               {showPassword ? "Hide" : "Show"}
-            </button>
+            </button> */}
           </div>
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
@@ -147,13 +147,13 @@ const Register = () => {
               onChange={handleInputChange}
               className={`form-input ${errors.password ? "error" : ""}`}
             />
-            <button
+            {/* <button
               type="button"
               className="show-password-btn"
               onClick={() => setShowCPassword(!showCPassword)} // Toggle password visibility
             >
               {showCPassword ? "Hide" : "Show"}
-            </button>
+            </button> */}
           </div>
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>

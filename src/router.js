@@ -14,7 +14,10 @@ import Profile from "./Pages/Profile";
 import LocationFeature from "./features/Admin/Locations/LocationFeature";
 import AdminDashboard from "./features/Admin/AdminDashboard";
 import EducationFeatures from "./features/Admin/Educations/EducationFeatures";
-import DemographicFeatures from "./features/Admin/Demographic/DemographicFeatures"
+import DemographicFeatures from "./features/Admin/Demographic/DemographicFeatures";
+import InstituteRegister from "./features/Auth/InstituteRegister";
+import InstituteDashboard from "./features/Institute/InstituteDashboard";
+import VerifyDocuments from "./features/StudentProfile/VerifyDocuments/VerifyDocuments";
 // Create a wrapper component that combines ProtectedRoute and FormProvider
 const ProtectedProfileWithForm = () => (
   <ProtectedRoute roles={["ve_student"]}>
@@ -47,6 +50,14 @@ export const router = createBrowserRouter([
         Component: () => (
           <ProtectedRoute roles={["ve_student"]}>
             <StudentDashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/verify-documents",
+        Component: () => (
+          <ProtectedRoute roles={["ve_student"]}>
+            <VerifyDocuments />
           </ProtectedRoute>
         ),
       },
@@ -96,6 +107,19 @@ export const router = createBrowserRouter([
         Component: () => (
           <ProtectedRoute roles={["ve_admin"]}>
             <DemographicFeatures />
+          </ProtectedRoute>
+        ),
+      },
+      // Institute
+      {
+        path: "/institute-register",
+        Component: () => <InstituteRegister />,
+      },
+      {
+        path: "/institute-dashboard",
+        Component: () => (
+          <ProtectedRoute roles={["ve_institute"]}>
+            <InstituteDashboard />
           </ProtectedRoute>
         ),
       },

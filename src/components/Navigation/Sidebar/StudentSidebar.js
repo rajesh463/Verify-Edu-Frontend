@@ -17,7 +17,7 @@ import {
 import { useAuth } from "../../../context/AuthContext";
 
 const StudentSidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
   const location = useLocation(); // Get current location
   const toggleProjectsSubmenu = () => {
@@ -35,11 +35,11 @@ const StudentSidebar = () => {
     if (user?.email) {
       return (
         <div className={isCollapsed ? "sidebar collapsed" : "sidebar"}>
-          <div className="user-info-wrapper">
+          {/* <div className="user-info-wrapper">
             <button className="toggle-button" onClick={toggleSidebar}>
               {isCollapsed ? "»" : "«"}
             </button>
-          </div>
+          </div> */}
 
           {/* Divider Line */}
           <hr className="sidebar-divider" />
@@ -66,6 +66,17 @@ const StudentSidebar = () => {
               >
                 <FaUserGraduate className="icon" />
                 {!isCollapsed && <span>Profile</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/verify-documents"
+                className={`menu-item ${
+                  isActive("/verify-documents") ? "active" : ""
+                }`}
+              >
+                <FaCentercode className="icon" />
+                {!isCollapsed && <span>Verify Doc</span>}
               </Link>
             </li>
           </ul>
