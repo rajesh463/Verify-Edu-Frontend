@@ -57,6 +57,17 @@ const InstituteSidebar = () => {
                 {!isCollapsed && <span>Dashboard</span>}
               </Link>
             </li>
+            <li>
+              <Link
+                to="/institute/verify-requests"
+                className={`menu-item ${
+                  isActive("/institute/verify-requests") ? "active" : ""
+                }`}
+              >
+                <FaChartBar className="icon" />
+                {!isCollapsed && <span>Verify Requests</span>}
+              </Link>
+            </li>
           </ul>
         </div>
       );

@@ -4,6 +4,14 @@ import { STUDENT } from "./APIURLs";
 const apiServiceBased = HttpInterceptor();
 
 export default {
+  VerifyStudentPastQualification: async (qualId) => {
+    return apiServiceBased.post(
+      `${STUDENT}/past-qualification/verify${qualId}`
+    );
+  },
+  getPastQualificationById: async (qualId) => {
+    return apiServiceBased.get(`${STUDENT}/past-qualification/${qualId}`);
+  },
   getPastQualifications: async (userId) => {
     return apiServiceBased.get(
       `${STUDENT}/past-qualifications?userId=${encodeURIComponent(userId)}`
@@ -16,7 +24,7 @@ export default {
   },
   getCurrentCourseQualificationswithCompleted: async (userId) => {
     return apiServiceBased.get(
-      `${STUDENT}/current-course/completed?userId=${encodeURIComponent(userId)}`
+      `${STUDENT}/current-courses-completed/${encodeURIComponent(userId)}`
     );
   },
   deletePastQualification: async (data) => {

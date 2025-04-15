@@ -170,7 +170,7 @@ const CurrentCourse = () => {
       if (response.data.success) {
         setDistricts(response.data.data);
       }
-    } catch (error) {
+      } catch (error) {
       setError("Error fetching districts");
     }
   };
@@ -422,17 +422,17 @@ const CurrentCourse = () => {
         </div>
 
         {/* Course */}
-        <div className="form-group">
+          <div className="form-group">
           <SelectInput
             label="Course"
             options={courses}
             value={selectedCourse}
-            onChange={(e) => {
+              onChange={(e) => {
               const value = e.target.value;
               setSelectedCourse(value);
               setFormData((prev) => ({ ...prev, course: value }));
-            }}
-            required
+              }}
+              required
             error={fieldErrors.course}
             disabled={!selectedStream}
           />
@@ -461,124 +461,124 @@ const CurrentCourse = () => {
             error={fieldErrors.district}
             disabled={!selectedState}
           />
-        </div>
+          </div>
 
         {/* Taluka */}
-        <div className="form-group">
+          <div className="form-group">
           <SelectInput
             label="Taluka"
             options={talukas}
             value={selectedTaluka}
             onChange={handleInstituteTalukaChange}
-            required
+              required
             error={fieldErrors.taluka}
             disabled={!selectedDistrict}
           />
-        </div>
+          </div>
 
         {/* Institute */}
-        <div className="form-group">
+          <div className="form-group">
           <SelectInput
             label="Institute Name"
             options={institutes}
             value={selectedInstitute}
-            onChange={(e) => {
+              onChange={(e) => {
               setSelectedInstitute(e.target.value);
               setFormData((prev) => ({
                 ...prev,
                 institute: e.target.value,
               }));
-            }}
-            required
+              }}
+              required
             error={fieldErrors.institute}
             disabled={!selectedTaluka}
           />
-        </div>
+          </div>
 
         {/* Board/University */}
-        <div className="form-group">
+          <div className="form-group">
           <SelectInput
             label="Board/University"
             options={boards}
             value={selectedBoardUniversity}
-            onChange={(e) => {
+              onChange={(e) => {
               setSelectedBoardUniversity(e.target.value);
               setFormData((prev) => ({
                 ...prev,
                 boardUniversity: e.target.value,
               }));
-            }}
-            required
+              }}
+              required
             error={fieldErrors.boardUniversity}
           />
-        </div>
+          </div>
 
         {/* Year of Study */}
-        <div className="form-group">
+          <div className="form-group">
           <SelectInput
             label="Year of Study"
             options={yearOfStudyOptions}
             value={selectedYearOfStudy}
             onChange={handleYearOfStudyChange}
-            required
+              required
             error={fieldErrors.yearOfStudy}
           />
-        </div>
+          </div>
 
         {/* Status */}
-        <div className="form-group">
+          <div className="form-group">
           <SelectInput
             label="Status"
             options={statusOptions}
             value={selectedStatus}
             onChange={handleStatusChange}
-            required
+              required
             error={fieldErrors.completed}
           />
-        </div>
+          </div>
 
         {/* Result fields (only shown if status is Completed) */}
         {selectedStatus === "Completed" && (
           <>
-            <div className="form-group">
+          <div className="form-group">
               <SelectInput
                 label="Result"
                 options={resultsOptions}
                 value={selectedResult}
                 onChange={handleResultChange}
-                required
+              required
                 error={fieldErrors.result}
               />
-            </div>
+          </div>
 
-            <div className="form-group">
+          <div className="form-group">
               <label>
                 Percentage
                 {fieldErrors.percentage && (
                   <span className="error-text">* {fieldErrors.percentage}</span>
                 )}
               </label>
-              <input
-                type="number"
+            <input
+              type="number"
                 name="percentage"
                 value={formData.percentage}
-                onChange={handleChange}
+              onChange={handleChange}
                 min="0"
                 max="100"
                 step="0.01"
-                required
+              required
                 className={fieldErrors.percentage ? "error-input" : ""}
-              />
-            </div>
+            />
+          </div>
 
             {/* File Upload Section */}
 
-            <div className="file-upload-section">
+          <div className="file-upload-section">
               <h3>Marksheet Upload</h3>
               {fieldErrors.marksheetFile && (
                 <div className="error-text">{fieldErrors.marksheetFile}</div>
               )}
-              <div className="upload-container">
+            <div className="upload-container">
                 {tag && (
                   <FileUpload
                     tag={tag}
@@ -586,16 +586,16 @@ const CurrentCourse = () => {
                     required={true}
                   />
                 )}
-              </div>
+            </div>
               {fileKey && (
-                <div className="view-container">
+            <div className="view-container">
                   <ViewFile tag={tag} />
                 </div>
               )}
             </div>
           </>
         )}
-      </div>
+          </div>
 
       {/* Error message */}
       {error && <div className="error-message">{error}</div>}
@@ -655,7 +655,7 @@ const CurrentCourse = () => {
                           >
                             <FaTrash />
                           </button>
-                        </div>
+            </div>
                       </td>
                     </tr>
                   );
@@ -669,8 +669,8 @@ const CurrentCourse = () => {
               )}
             </tbody>
           </table>
-        </div>
-      </div>
+            </div>
+          </div>
 
       {/* Modals */}
       {showSuccessModal && (

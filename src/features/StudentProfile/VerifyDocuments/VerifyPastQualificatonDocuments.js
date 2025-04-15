@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
+import VerifyApi from "../../../services/Verify.api";
 import StudentApi from "../../../services/Student.api";
 import ViewFile from "../../../components/File/ViewFile";
 import "./VerifyDocuments.css";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 const VerifyPastQualificatonDocuments = () => {
   const [pastqualifications, setPastQualifications] = useState([]);
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const getPastQualifications = async () => {
     const res = await StudentApi.getPastQualifications(user?.email);
-    console.log(res?.data?.data);
+    // console.log(res?.data?.data?._id);
     setPastQualifications(res?.data?.data || []);
   };
 
   useEffect(() => {
     if (user?.email) getPastQualifications();
   }, [user?.email]);
-
+  const onVerifyButton = (qualId) => {
+    console.log("Hello123", qualId);
+    if (qualId) {
+      navigate(`/verify-documents-form-past-qualification/${qualId}`);
+    }
+  };
   return (
     <div className="verify-documents-container">
       <h2 className="verify-documents-title">
@@ -63,7 +69,9 @@ const VerifyPastQualificatonDocuments = () => {
                   />
                 </td>
                 <td>
-                  <Link to="/student-verification-form">Verify</Link>
+                  <button onClick={() => onVerifyButton(qualification?._id)}>
+                    Verify
+                  </button>
                 </td>
               </tr>
             ))}

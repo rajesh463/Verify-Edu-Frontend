@@ -18,6 +18,9 @@ import DemographicFeatures from "./features/Admin/Demographic/DemographicFeature
 import InstituteRegister from "./features/Auth/InstituteRegister";
 import InstituteDashboard from "./features/Institute/InstituteDashboard";
 import VerifyDocuments from "./features/StudentProfile/VerifyDocuments/VerifyDocuments";
+import VerifyFormPastQualification from "./features/StudentProfile/VerifyDocuments/VerifyFormPastQualification";
+import AllRequest from "./features/Institute/AllRequest";
+import VerifyFormInstitute from "./features/Institute/VerifyFormInstitute";
 // Create a wrapper component that combines ProtectedRoute and FormProvider
 const ProtectedProfileWithForm = () => (
   <ProtectedRoute roles={["ve_student"]}>
@@ -61,6 +64,15 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/verify-documents-form-past-qualification/:qualId",
+        Component: () => (
+          <ProtectedRoute roles={["ve_student"]}>
+            <VerifyFormPastQualification />
+          </ProtectedRoute>
+        ),
+      },
+
       {
         path: "/aboutus",
         Component: AboutUs,
@@ -120,6 +132,22 @@ export const router = createBrowserRouter([
         Component: () => (
           <ProtectedRoute roles={["ve_institute"]}>
             <InstituteDashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/institute/verify-requests",
+        Component: () => (
+          <ProtectedRoute roles={["ve_institute"]}>
+            <AllRequest />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/institute/verify-form/:qualId",
+        Component: () => (
+          <ProtectedRoute roles={["ve_institute"]}>
+            <VerifyFormInstitute />
           </ProtectedRoute>
         ),
       },

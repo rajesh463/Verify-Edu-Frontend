@@ -3,14 +3,14 @@ import { useAuth } from "../../../context/AuthContext";
 import StudentApi from "../../../services/Student.api";
 import ViewFile from "../../../components/File/ViewFile";
 import "./VerifyDocuments.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const VerifyCurrentCourseDocuments = () => {
   const [pastqualifications, setPastQualifications] = useState([]);
   const { user } = useAuth();
-
+  const navigate = useNavigate();
   const getCurrentCourseQualifications = async () => {
-    const res = await StudentApi.getCurrentCourseQualifications(
+    const res = await StudentApi.getCurrentCourseQualificationswithCompleted(
       user?.email
     );
     console.log(res?.data?.data);
@@ -20,7 +20,9 @@ const VerifyCurrentCourseDocuments = () => {
   useEffect(() => {
     if (user?.email) getCurrentCourseQualifications();
   }, [user?.email]);
-
+  const onVerifyButton = (qualificationId) => {
+    navigate(`/verify-documents-form-current-course/${qualificationId}`);
+  };
   return (
     <div className="verify-documents-container">
       <h2 className="verify-documents-title">
@@ -65,7 +67,9 @@ const VerifyCurrentCourseDocuments = () => {
                   />
                 </td>
                 <td>
-                  <Link to="/student-verification-form">Verify</Link>
+                  <button onClick={() => onVerifyButton(qualification?._id)}>
+                    Verify
+                  </button>
                 </td>
               </tr>
             ))}

@@ -13,11 +13,7 @@ export const useAuth = () => {
 
 // Auth provider to wrap your app and provide the authentication state
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    role: "",
-  });
+  const [user, setUser] = useState(null);
 
   // Load the user from localStorage or API when the app mounts
   useEffect(() => {
@@ -34,35 +30,45 @@ export const AuthProvider = ({ children }) => {
         role: res?.data?.role,
         name: res?.data?.name,
         email: res?.data?.email,
+        _id: res?.data?._id,
       };
       setUser(profile);
-      return profile; // Return the profile for immediate use
+      return profile;
     } catch (error) {
       console.error("Error fetching profile:", error);
-      setUser(null); // Ensure the user is cleared if fetching fails
+      setUser(null);
+      localStorage.removeItem("ve-token"); // Clear invalid token
       throw new Error("Failed to fetch user profile.");
     }
   };
 
-  const login = async (userToken) => {
+  const login = async (loginResponse) => {
     try {
-      localStorage.setItem("ve-token", userToken); // Store token
-      const profile = await getProfile(); // Wait for profile to load
-      return profile; // Return profile after successful login
+      const { token, user: userData } = loginResponse;
+      localStorage.setItem("ve-token", token);
+
+      const profile = {
+        role: userData.role,
+        name: userData.name,
+        email: userData.email,
+        _id: userData._id,
+      };
+
+      setUser(profile);
+      return profile;
     } catch (error) {
       console.error("Login failed:", error);
       throw new Error("Login failed. Please try again.");
     }
   };
 
-  // Logout function to clear the user and token
   const logout = () => {
     setUser(null);
     localStorage.removeItem("ve-token");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, getProfile }}>
       {children}
     </AuthContext.Provider>
   );
