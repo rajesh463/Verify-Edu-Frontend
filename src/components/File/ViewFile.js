@@ -4,7 +4,7 @@ import Services from "../../services/Services";
 
 import "./ViewFile.css";
 
-const ViewFile = ({ tag }) => {
+const ViewFile = ({ tag, userId = null }) => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,9 +15,19 @@ const ViewFile = ({ tag }) => {
     try {
       setLoading(true);
       setMessage("");
-      const res = await Services.getPreSignedUrlToAccess(user.email, tag);
-      setFileUrl(res?.data?.url);
-      setFile(res?.data?.file);
+      let res;
+      if (userId) {
+        res = await Services.getPreSignedUrlToAccess(userId, tag);
+      } else {
+        res = await Services.getPreSignedUrlToAccess(user.email, tag);
+      }
+
+      if (res && res.data) {
+        setFileUrl(res.data.url);
+        setFile(res.data.file);
+      } else {
+        setMessage("No file data received.");
+      }
     } catch (error) {
       setMessage("Error fetching file.");
       console.error(error);

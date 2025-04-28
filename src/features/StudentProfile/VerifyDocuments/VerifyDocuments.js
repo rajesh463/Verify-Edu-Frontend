@@ -14,16 +14,16 @@ const VerifyDocuments = () => {
       label: "Past Qualification",
       icon: <FaSchool />,
     },
-    {
-      id: "CurrentCourse",
-      label: "Current-Course",
-      icon: <FaUserGraduate />,
-    },
+    // {
+    //   id: "CurrentCourse",
+    //   label: "Current-Course",
+    //   icon: <FaUserGraduate />,
+    // },
   ];
 
   const components = {
     PastQualification: <VerifyPastQualificatonDocuments />,
-    CurrentCourse: <VerifyCurrentCourseDocuments />,
+    // CurrentCourse: <VerifyCurrentCourseDocuments />,
   };
 
   return (

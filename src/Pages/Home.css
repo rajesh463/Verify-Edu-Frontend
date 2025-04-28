@@ -9,66 +9,196 @@ body {
 
 /* Home Container */
 .home-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
 }
 
-/* Carousel Styling */
-.carousel {
+.hero-section {
   position: relative;
-  width: 100%;
-  height: 300px;
-  margin-bottom: 20px;
+  height: 80vh;
   overflow: hidden;
+}
+
+.carousel {
+  height: 100%;
+  position: relative;
 }
 
 .carousel-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: slide 3s ease-in-out infinite;
+  filter: brightness(0.7);
 }
 
-@keyframes slide {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(-200%);
-  }
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  width: 80%;
+  max-width: 800px;
 }
 
-/* Ticker (Running Notice) Styling */
-.ticker {
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.primary-button, .secondary-button {
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.primary-button {
   background-color: #007bff;
   color: white;
-  padding: 10px;
-  margin-bottom: 20px;
 }
 
-marquee {
-  font-size: 18px;
-  font-weight: bold;
+.primary-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
-/* Welcome Section */
-.welcome-message {
-  text-align: center;
-  padding: 20px;
+.secondary-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 2px solid white;
+  color: white;
+}
+
+.secondary-button:hover {
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #007bff;
 }
 
-.welcome-message h1 {
-  font-size: 36px;
-  margin: 0;
+.features-section {
+  padding: 5rem 2rem;
+  background-color: white;
 }
 
-.welcome-message p {
-  font-size: 18px;
+.features-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #2c3e50;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: #007bff;
+  margin-bottom: 1.5rem;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.feature-card p {
+  color: #6c757d;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.feature-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.feature-link:hover {
+  color: #0056b3;
+}
+
+.announcement-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.announcement-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.announcement-text {
+  font-weight: 500;
+}
+
+.announcement-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.announcement-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+
+  .features-section {
+    padding: 3rem 1rem;
+  }
+
+  .features-section h2 {
+    font-size: 2rem;
+  }
 }

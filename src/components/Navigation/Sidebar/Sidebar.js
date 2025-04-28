@@ -4,6 +4,7 @@ import { useAuth } from "../../../context/AuthContext";
 import AdminSidebar from "./AdminSidebar";
 import StudentSidebar from "./StudentSidebar";
 import InstituteSidebar from "./InstituteSidebar";
+import DummySidebar from "./DummySidebar";
 const Sidebar = () => {
   const { user } = useAuth();
   const FunReturn = () => {
@@ -14,7 +15,7 @@ const Sidebar = () => {
     } else if (user?.role == "ve_institute") {
       return <InstituteSidebar />;
     }
-    return null; // Default return for when no role matches
+    return <DummySidebar/>; // Default return for when no role matches
   };
   return FunReturn();
 };

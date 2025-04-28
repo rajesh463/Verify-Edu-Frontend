@@ -47,11 +47,11 @@ const FileUpload = ({ tag, setFileKey }) => {
       const { url, key } = res?.data;
       setFileKey(key);
 
-      const uploadResponse = await uploadToAwsS3(url, file, (progress) => {
+      const uploadSuccess = await uploadToAwsS3(url, file, (progress) => {
         setUploadProgress(Math.round(progress));
       });
 
-      if (uploadResponse) {
+      if (uploadSuccess) {
         const resmongo = await Services.putFileMetaDataToMongoDb({
           filename: file.name,
           contentType: file.type,
@@ -63,22 +63,21 @@ const FileUpload = ({ tag, setFileKey }) => {
         if (resmongo.status === 201) {
           setMessage("File uploaded successfully!");
           setFile(null);
+          setUploadProgress(0); // Reset progress immediately on success
           const fileInput = document.querySelector(`input[name="${tag}"]`);
           if (fileInput) fileInput.value = "";
         } else {
           setMessage("Error while storing meta data");
         }
+      } else {
+        setMessage("Error uploading file to S3. Please try again.");
       }
     } catch (error) {
       console.error("Upload error:", error);
       setMessage("Error uploading file. Please try again.");
     } finally {
       setIsUploading(false);
-      setTimeout(() => {
-        if (uploadProgress === 100) {
-          setUploadProgress(0);
-        }
-      }, 2000);
+      // Remove the setTimeout as we don't need it anymore
     }
   };
 
@@ -110,7 +109,7 @@ const FileUpload = ({ tag, setFileKey }) => {
           </button>
         )}
 
-        {(isUploading || uploadProgress > 0) && (
+        {(isUploading || (uploadProgress > 0 && uploadProgress < 100)) && (
           <div className="upload-progress-container">
             <div className="upload-progress-bar">
               <div

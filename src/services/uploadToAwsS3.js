@@ -19,7 +19,14 @@ const uploadToAwsS3 = async (url, file, setUploadProgress) => {
       onUploadProgress,
       true // Exclude Authorization header
     );
-    return response;
+
+    // S3 upload with pre-signed URL typically returns a 200 status with no content
+    // We'll consider any 2xx status as success
+    if (response && response.status >= 200 && response.status < 300) {
+      return true; // Return true to indicate successful upload
+    }
+
+    return false; // Return false if status is not in 2xx range
   } catch (error) {
     console.error("File upload failed:", error);
     throw error;

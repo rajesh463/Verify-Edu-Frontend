@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import VerifyApi from "../../services/Verify.api";
+import { useAuth } from "../../../context/AuthContext";
+import VerifyApi from "../../../services/Verify.api";
 import { useNavigate } from "react-router-dom";
 import "./VerifyDocuments.css";
 
-const AllRequest = () => {
+const RequestStatus = () => {
   const [verifications, setVerifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
@@ -13,9 +13,8 @@ const AllRequest = () => {
   const getVerifications = async () => {
     try {
       setLoading(true);
-      const response = await VerifyApi.getInstituteVerificationRequest(
-        user?._id,
-        "Pending"
+      const response = await VerifyApi.getVerificationForStudent(
+        user?.email
       );
       setVerifications(response?.data?.data || []);
     } catch (error) {
@@ -26,10 +25,10 @@ const AllRequest = () => {
   };
 
   useEffect(() => {
-    if (user?._id) {
+    if (user?.email) {
       getVerifications();
     }
-  }, [user?._id]);
+  }, [user?.email]);
 
   if (loading) {
     return <div className="loading">Loading...</div>;
@@ -37,11 +36,11 @@ const AllRequest = () => {
 
   const onView = (qualId, studEmail) => {
     console.log(qualId, studEmail)
-    if (qualId) navigate(`/institute/verify-form/${qualId}/${studEmail}`);
+    if (qualId) navigate(`/student/view-requests/${qualId}/${studEmail}`);
   };
   return (
     <div className="verify-documents-container">
-      <h2 className="verify-documents-title">Pending Verification Requests</h2>
+      <h2 className="verify-documents-title">Verification Requests Status</h2>
       <div className="verify-documents-table-container">
         <table className="verify-documents-table">
           <thead>
@@ -119,4 +118,4 @@ const AllRequest = () => {
   );
 };
 
-export default AllRequest;
+export default RequestStatus;

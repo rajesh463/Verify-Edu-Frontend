@@ -6,3 +6,4 @@ export const EDUCATION = "/api/v1/educations";
 export const DEMOGRAPHICS = "/api/v1/demographic";
 export const INSTITUTE = "/api/v1/institutes";
 export const VERIFY = "/api/v1/verify";
+export const BCTRANSACTION = "/api/v1/bc-transaction";

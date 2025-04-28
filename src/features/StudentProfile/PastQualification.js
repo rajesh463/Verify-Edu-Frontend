@@ -36,7 +36,7 @@ const PastQualification = () => {
   const [qualifications, setQualifications] = useState([]);
   const [statusOptions, setStatusOptions] = useState([
     { _id: "completed", name: "Completed", value: "Completed" },
-    { _id: "pursuing", name: "Pursuing", value: "Pursuing" },
+    // { _id: "pursuing", name: "Pursuing", value: "Pursuing" },
   ]);
   const [resultsOptions, setResultsOptions] = useState([
     { _id: "pass", name: "Pass", value: "Pass" },

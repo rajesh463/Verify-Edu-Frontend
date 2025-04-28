@@ -16,15 +16,13 @@ import {
 } from "react-icons/fa"; // Import icons from react-icons
 import { useAuth } from "../../../context/AuthContext";
 
-const AdminSidebar = () => {
+const DummySidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isProjectsSubmenuOpen, setIsProjectsSubmenuOpen] = useState(false);
   const location = useLocation(); // Get current location
   const toggleProjectsSubmenu = () => {
     setIsProjectsSubmenuOpen(!isProjectsSubmenuOpen);
   };
-
-  const { user } = useAuth();
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
@@ -32,84 +30,47 @@ const AdminSidebar = () => {
   // Helper function to check if the route is active
   const isActive = (path) => location.pathname === path;
   const returnFun = () => {
-    if (user?.email) {
+    
       return (
         <div className={isCollapsed ? "sidebar collapsed" : "sidebar"}>
-          {/* <div className="user-info-wrapper">
-            <button className="toggle-button" onClick={toggleSidebar}>
-              {isCollapsed ? "»" : "«"}
-            </button>
-          </div> */}
+         
 
-          {/* Divider Line */}
+         
           <hr className="sidebar-divider" />
 
           {/* Sidebar Menu */}
           <ul className="sidebar-menu">
-          <li>
+            <li>
               <Link
                 to="/"
                 className={`menu-item ${
                   isActive("/") ? "active" : ""
                 }`}
               >
-                <FaSchool className="icon" />
+                <FaCentercode className="icon" />
                 {!isCollapsed && <span>Home</span>}
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
-                to="/admin-dashboard"
+                to="/institute/verify-requests"
                 className={`menu-item ${
-                  isActive("/admindashboard") ? "active" : ""
-                }`}
-              >
-                <FaSchool className="icon" />
-                {!isCollapsed && <span>Dashboard</span>}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/locations"
-                className={`menu-item ${
-                  isActive("/locations") ? "active" : ""
-                }`}
-              >
-                <FaUserGraduate className="icon" />
-                {!isCollapsed && <span>Locations</span>}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/education"
-                className={`menu-item ${
-                  isActive("/education") ? "active" : ""
-                }`}
-              >
-                <MdAssignment className="icon" />
-                {!isCollapsed && <span>Education</span>}
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/demographic"
-                className={`menu-item ${
-                  isActive("/demographic") ? "active" : ""
+                  isActive("/institute/verify-requests") ? "active" : ""
                 }`}
               >
                 <FaChartBar className="icon" />
-                {!isCollapsed && <span>Demographic</span>}
+                {!isCollapsed && <span>Verify Requests</span>}
               </Link>
-            </li>
+            </li> */}
+            
+           
           </ul>
         </div>
       );
-    } else {
-      return <></>;
-    }
+    
   };
 
   return returnFun();
 };
 
-export default AdminSidebar;
+export default DummySidebar;

@@ -63,7 +63,7 @@ const VerifyFormPastQualification = () => {
     try {
       if (qualId && qualification?.instituteName?._id) {
         const res = await VerifyApi.VerifyStudentPastQualification({
-          qualId: qualId,
+          qualification,
           instituteId: qualification.instituteName._id,
           studentEmail: user?.email,
         });

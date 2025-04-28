@@ -10,6 +10,7 @@ import App from "./App";
 import ProtectedRoute from "./components/Navigation/ProtectedRoute";
 import AccessDenied from "./Pages/AccessDenied";
 import Profile from "./Pages/Profile";
+import BcProfile from "./features/StudentProfile/BcProfile";
 
 import LocationFeature from "./features/Admin/Locations/LocationFeature";
 import AdminDashboard from "./features/Admin/AdminDashboard";
@@ -21,6 +22,11 @@ import VerifyDocuments from "./features/StudentProfile/VerifyDocuments/VerifyDoc
 import VerifyFormPastQualification from "./features/StudentProfile/VerifyDocuments/VerifyFormPastQualification";
 import AllRequest from "./features/Institute/AllRequest";
 import VerifyFormInstitute from "./features/Institute/VerifyFormInstitute";
+import RejectedRequest from "./features/Institute/RejectedRequest";
+import ApprovedRequest from "./features/Institute/ApprovedRequest";
+import ViewForm from "./features/Institute/ViewForm";
+import ViewStudentForm from "./features/StudentProfile/VerifyDocuments/ViewForm";
+import RequestStatus from "./features/StudentProfile/VerifyDocuments/RequestStatus";
 // Create a wrapper component that combines ProtectedRoute and FormProvider
 const ProtectedProfileWithForm = () => (
   <ProtectedRoute roles={["ve_student"]}>
@@ -57,10 +63,30 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/:email",
+        Component:BcProfile
+      },
+      {
         path: "/verify-documents",
         Component: () => (
           <ProtectedRoute roles={["ve_student"]}>
             <VerifyDocuments />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/student-verify-request-status",
+        Component: () => (
+          <ProtectedRoute roles={["ve_student"]}>
+            <RequestStatus/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/student/view-requests/:qualId/:studEmail",
+        Component: () => (
+          <ProtectedRoute roles={["ve_student"]}>
+             <ViewStudentForm/>
           </ProtectedRoute>
         ),
       },
@@ -144,10 +170,34 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/institute/verify-form/:qualId",
+        path: "/institute/verify-form/:qualId/:studEmail",
         Component: () => (
           <ProtectedRoute roles={["ve_institute"]}>
             <VerifyFormInstitute />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/institute/approved-requests",
+        Component: () => (
+          <ProtectedRoute roles={["ve_institute"]}>
+            <ApprovedRequest />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/institute/rejected-requests",
+        Component: () => (
+          <ProtectedRoute roles={["ve_institute"]}>
+            <RejectedRequest />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/institute/view-requests/:qualId/:studEmail",
+        Component: () => (
+          <ProtectedRoute roles={["ve_institute"]}>
+            <ViewForm />
           </ProtectedRoute>
         ),
       },

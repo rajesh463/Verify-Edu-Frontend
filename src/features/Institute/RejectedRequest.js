@@ -4,7 +4,7 @@ import VerifyApi from "../../services/Verify.api";
 import { useNavigate } from "react-router-dom";
 import "./VerifyDocuments.css";
 
-const AllRequest = () => {
+const RejectedRequest = () => {
   const [verifications, setVerifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
@@ -15,7 +15,7 @@ const AllRequest = () => {
       setLoading(true);
       const response = await VerifyApi.getInstituteVerificationRequest(
         user?._id,
-        "Pending"
+        "Rejected"
       );
       setVerifications(response?.data?.data || []);
     } catch (error) {
@@ -37,11 +37,11 @@ const AllRequest = () => {
 
   const onView = (qualId, studEmail) => {
     console.log(qualId, studEmail)
-    if (qualId) navigate(`/institute/verify-form/${qualId}/${studEmail}`);
+    if (qualId) navigate(`/institute/view-requests/${qualId}/${studEmail}`);
   };
   return (
     <div className="verify-documents-container">
-      <h2 className="verify-documents-title">Pending Verification Requests</h2>
+      <h2 className="verify-documents-title">Rejected Verification Requests</h2>
       <div className="verify-documents-table-container">
         <table className="verify-documents-table">
           <thead>
@@ -119,4 +119,4 @@ const AllRequest = () => {
   );
 };
 
-export default AllRequest;
+export default RejectedRequest;

@@ -10,7 +10,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "",
+    role: "ve_student",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -158,7 +158,7 @@ const Register = () => {
           {errors.password && <p className="error-text">{errors.password}</p>}
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <select
             name="role"
             value={formData.role}
@@ -172,7 +172,7 @@ const Register = () => {
             <option value="institute">Institute</option>
             <option value="admin">Admin</option>
           </select>
-        </div>
+        </div> */}
         <button type="submit" className="submit-btn">
           Register
         </button>

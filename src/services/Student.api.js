@@ -10,11 +10,11 @@ export default {
     );
   },
   getPastQualificationById: async (qualId) => {
-    return apiServiceBased.get(`${STUDENT}/past-qualification/${qualId}`);
+    return apiServiceBased.get(`${STUDENT}/past-qualification/data/${qualId}`);
   },
-  getPastQualifications: async (userId) => {
+  getPastQualificationsToVerify: async (userId) => {
     return apiServiceBased.get(
-      `${STUDENT}/past-qualifications?userId=${encodeURIComponent(userId)}`
+      `${STUDENT}/past-qualification/${encodeURIComponent(userId)}`
     );
   },
   getCurrentCourseQualifications: async (userId) => {

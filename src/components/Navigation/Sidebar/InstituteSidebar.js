@@ -46,6 +46,17 @@ const InstituteSidebar = () => {
 
           {/* Sidebar Menu */}
           <ul className="sidebar-menu">
+          <li>
+              <Link
+                to="/"
+                className={`menu-item ${
+                  isActive("/") ? "active" : ""
+                }`}
+              >
+                <FaCentercode className="icon" />
+                {!isCollapsed && <span>Home</span>}
+              </Link>
+            </li>
             <li>
               <Link
                 to="/institute-dashboard"
@@ -68,6 +79,29 @@ const InstituteSidebar = () => {
                 {!isCollapsed && <span>Verify Requests</span>}
               </Link>
             </li>
+            <li>
+              <Link
+                to="/institute/approved-requests"
+                className={`menu-item ${
+                  isActive("/institute/approved-requests") ? "active" : ""
+                }`}
+              >
+                <AiOutlineUserAdd className="icon" />
+                {!isCollapsed && <span>Approved Requests</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/institute/rejected-requests"
+                className={`menu-item ${
+                  isActive("/institute/rejected-requests") ? "active" : ""
+                }`}
+              >
+                <FaChalkboardTeacher className="icon" />
+                {!isCollapsed && <span>Rejected Requests</span>}
+              </Link>
+            </li>
+           
           </ul>
         </div>
       );

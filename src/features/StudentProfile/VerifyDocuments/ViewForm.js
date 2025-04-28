@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import StudentApi from "../../services/Student.api";
-import VerifyApi from "../../services/Verify.api";
+import StudentApi from "../../../services/Student.api";
+import VerifyApi from "../../../services/Verify.api";
 import "./PastQualification.css";
-import { useAuth } from "../../context/AuthContext";
-import SuccessModal from "../../components/FeedbackComponents/Sucess/SuccessModal";
-import ErrorModal from "../../components/FeedbackComponents/Error/ErrorModal";
-import ViewFile from "../../components/File/ViewFile";
+import { useAuth } from "../../../context/AuthContext";
+import SuccessModal from "../../../components/FeedbackComponents/Sucess/SuccessModal";
+import ErrorModal from "../../../components/FeedbackComponents/Error/ErrorModal";
+import ViewFile from "../../../components/File/ViewFile";
 import { useParams, useNavigate } from "react-router-dom";
 
-const VerifyFormInstitute = () => {
+const ViewForm = () => {
   // Add these new states
   const [showCommentModal, setShowCommentModal] = useState(false);
   const [comment, setComment] = useState("");
@@ -43,6 +43,8 @@ const VerifyFormInstitute = () => {
         const response = await VerifyApi.getInstituteVerificatonByStudentIdandQualficationId(data);
         if (response.data.success) {
           setQualification(response.data.data.qualification);
+          console.log("student data: ", response.data.data);
+          setComment(response.data.data.comments);
         }
       } catch (error) {
         console.error("Error fetching qualification:", error);
@@ -63,6 +65,7 @@ const VerifyFormInstitute = () => {
         const res = await StudentApi.getPersonalInfo(studEmail);
         if (res.data.success) {
           setStudentData(res.data.data);
+          
         }
       } catch (error) {
         console.log("error fetching student info: ", error);
@@ -156,7 +159,7 @@ const VerifyFormInstitute = () => {
 
   return (
     <div className="section-container">
-      <h2>Student Qualification Verification</h2>
+      <h2>Student Data</h2>
 
       {studentData && (
         <div className="student-info-section">
@@ -219,26 +222,17 @@ const VerifyFormInstitute = () => {
           />
         </div>
       </div>
-
       <div className="comment-section">
         <h3>Comment</h3>
         <textarea
           className="comment-textarea"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Enter your comments..."
           rows="4"
+          disabled
         />
       </div>
-
-      <div className="action-buttons">
-        <button className="approve" onClick={() => handleVerifyClick('approve')}>
-          Approve
-        </button>
-        <button className="reject" onClick={() => handleVerifyClick('reject')}>
-          Reject
-        </button>
-      </div>
+      
 
       {showSuccessModal && (
         <SuccessModal onClose={handleCloseSuccessModal} data={successMessage} />
@@ -288,4 +282,4 @@ const VerifyFormInstitute = () => {
   );
 };
 
-export default VerifyFormInstitute;
+export default ViewForm;

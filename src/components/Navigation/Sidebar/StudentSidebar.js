@@ -46,11 +46,22 @@ const StudentSidebar = () => {
 
           {/* Sidebar Menu */}
           <ul className="sidebar-menu">
+          <li>
+              <Link
+                to="/"
+                className={`menu-item ${
+                  isActive("/") ? "active" : ""
+                }`}
+              >
+                <FaCentercode className="icon" />
+                {!isCollapsed && <span>Home</span>}
+              </Link>
+            </li>
             <li>
               <Link
                 to="/student-dashboard"
                 className={`menu-item ${
-                  isActive("/studentdashboard") ? "active" : ""
+                  isActive("/student-dashboard") ? "active" : ""
                 }`}
               >
                 <FaSchool className="icon" />
@@ -61,11 +72,11 @@ const StudentSidebar = () => {
               <Link
                 to="/student-profile"
                 className={`menu-item ${
-                  isActive("/student-prfile") ? "active" : ""
+                  isActive("/student-profile") ? "active" : ""
                 }`}
               >
                 <FaUserGraduate className="icon" />
-                {!isCollapsed && <span>Profile</span>}
+                {!isCollapsed && <span>Student Data</span>}
               </Link>
             </li>
             <li>
@@ -77,6 +88,17 @@ const StudentSidebar = () => {
               >
                 <FaCentercode className="icon" />
                 {!isCollapsed && <span>Verify Doc</span>}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/student-verify-request-status"
+                className={`menu-item ${
+                  isActive("/student-verify-request-status") ? "active" : ""
+                }`}
+              >
+                <FaCentercode className="icon" />
+                {!isCollapsed && <span>Request Status</span>}
               </Link>
             </li>
           </ul>
