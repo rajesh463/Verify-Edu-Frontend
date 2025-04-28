@@ -23,6 +23,10 @@ export default {
   getProfile: async () => {
     return apiServiceBased.get(`${AUTH}/profile`);
   },
+  getFileByKey: async (key) => {
+    return apiServiceBased.post(`${FILES}/file`, { key });
+  },
+
   getPreSignedUrlToUpload: async (fileData) => {
     console.log(fileData);
     return apiServiceBased.post(`${FILES}/presinged-url`, {

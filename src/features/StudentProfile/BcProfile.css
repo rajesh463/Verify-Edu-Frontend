@@ -1,0 +1,298 @@
+.blockchain-container {
+    @apply container mx-auto p-4 bg-gray-100;
+}
+
+.blockchain-title {
+    @apply text-2xl font-bold mb-6 text-gray-800;
+}
+
+.blockchain-block {
+    @apply bg-white shadow-xl rounded-lg p-6 mb-8 border border-gray-200 relative hover:shadow-2xl transition-shadow duration-300;
+}
+
+.block-corner {
+    @apply absolute w-6 h-6 bg-blue-500 rounded-full;
+}
+
+.block-corner-tl {
+    @apply -top-3 -left-3;
+}
+
+.block-corner-tr {
+    @apply -top-3 -right-3;
+}
+
+.block-corner-bl {
+    @apply -bottom-3 -left-3;
+}
+
+.block-corner-br {
+    @apply -bottom-3 -right-3;
+}
+
+.block-number {
+    @apply absolute top-4 right-4 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold;
+}
+
+.block-title {
+    @apply text-xl font-semibold mb-6 text-gray-800 pb-3 border-b-2 border-blue-200;
+}
+
+.block-content {
+    @apply grid grid-cols-3 gap-8;
+}
+
+.document-preview {
+    @apply cursor-pointer group;
+}
+
+.document-container {
+    @apply bg-gradient-to-br from-blue-50 to-gray-50 p-4 rounded-lg border-2 border-blue-100 shadow-sm group-hover:shadow-lg group-hover:border-blue-300 transition-all duration-300;
+}
+
+.document-image {
+    @apply w-32 h-32 object-cover rounded-md mx-auto shadow-sm group-hover:shadow-md transition-shadow duration-300;
+}
+
+.document-text {
+    @apply text-xs text-center mt-3 text-blue-700 font-medium group-hover:text-blue-900;
+}
+
+.details-container {
+    @apply col-span-2 grid grid-cols-2 gap-6 bg-gradient-to-br from-gray-50 to-white p-6 rounded-lg border border-gray-100;
+}
+
+.details-column {
+    @apply space-y-3;
+}
+
+.detail-item {
+    @apply text-sm;
+}
+
+.detail-label {
+    @apply font-semibold text-gray-700;
+}
+
+.detail-value {
+    @apply text-gray-600;
+}
+
+.profile-container {
+    min-height: 100vh;
+    background-color: #f8fafc;
+    padding: 2rem 1rem;
+}
+
+.profile-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.profile-title {
+    color: white;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.profile-subtitle {
+    color: #e2e8f0;
+    font-size: 1.25rem;
+}
+
+.records-container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.record-card {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.record-header {
+    background: linear-gradient(to right, #2563eb, #3b82f6);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.record-number {
+    color: white;
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.qualification-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+}
+
+.record-content {
+    padding: 1.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.info-section {
+    background-color: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* SVG Icons */
+.section-icon {
+    width: 1.25rem;  /* Increased from 0.75rem */
+    height: 1.25rem; /* Increased from 0.75rem */
+    margin-right: 0.75rem;
+}
+
+/* Empty state icon */
+.no-records-icon {
+    width: 3rem;      /* 48px */
+    height: 3rem;     /* 48px */
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    color: #9CA3AF;   /* text-gray-400 */
+}
+
+/* Blockchain verification icon */
+.verification-icon {
+    width: 0.875rem;  /* 14px */
+    height: 0.875rem; /* 14px */
+    margin-right: 0.5rem;
+    color: #10B981;   /* text-green-500 */
+}
+
+/* Section icons */
+.section-icon {
+    width: 0.75rem;   /* 12px */
+    height: 0.75rem;  /* 12px */
+    margin-right: 0.5rem;
+}
+
+/* View marksheet icon */
+.view-marksheet-icon {
+    width: 1rem;      /* 16px */
+    height: 1rem;     /* 16px */
+    margin-right: 0.5rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.info-label {
+    color: #64748b;
+}
+
+.info-value {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.metrics-container {
+    margin-top: 1.5rem;
+    background-color: #f8fafc;
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.metric-item {
+    text-align: center;
+    padding: 0.75rem;
+}
+
+.metric-label {
+    color: #64748b;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.metric-value {
+    color: #1e293b;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.percentage-value {
+    color: #2563eb;
+}
+
+.view-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    margin-top: 1.5rem;
+}
+
+.view-button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.view-button svg {
+    margin-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-item {
+        border-bottom: 1px solid #e2e8f0;
+        padding: 1rem 0;
+    }
+
+    .metric-item:last-child {
+        border-bottom: none;
+    }
+}

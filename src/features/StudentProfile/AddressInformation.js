@@ -320,6 +320,7 @@ const AddressInformation = () => {
   const handleSave = async () => {
     try {
       const formData = {
+        userId:user?.email,
         permanentAddress: formState.addresses.permanentAddress,
         currentAddress: formState.addresses.currentAddress,
       };

@@ -33,7 +33,7 @@ const Navbar = () => {
     if (!user?.role) return "/";
     switch (user.role) {
       case "ve_student":
-        return "/student-profile";
+        return `${user?.email}`;
       case "ve_institute":
         return "/institute-profile";
       case "ve_admin":
